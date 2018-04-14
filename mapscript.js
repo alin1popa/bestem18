@@ -135,18 +135,20 @@ function initAutocomplete() {
     });
 }
 
-function getCloseHotels() {
+function getCloseHotels(position) {
+    getlodgingJSON(position.lat, position.lng, false, showHotels);
 }
 
-function getCloseMuseums() {
+function getCloseMuseums(position) {
+    getMuseumsJSON(position.lat, position.lng, false, false, showMuseums);
 }
 
 function getCloseRestaurants(position) {
-    return getRestaurantsJSON(position.lat, position.lng, '', '', 'distance', showRestaurants);
+    getRestaurantsJSON(position.lat, position.lng, '', '', 'distance', showRestaurants);
 }
 
-function getCloseClubs() {
-   // return [{"lat":44.430715352415525,"lng":26.05184555053711,"name":"hqqbgew"},{"lat":44.44137909691852,"lng":26.097164154052734,"name":"poamrzb"},{"lat":44.42752810855755,"lng":26.087207794189453,"name":"srqsajvxe"},{"lat":44.42090789289679,"lng":26.031246185302734,"name":"ghamoq"},{"lat":44.44662219614843,"lng":26.001983214453162,"name":"mfkqpbvad"},{"lat":44.46573680410561,"lng":26.03271060092777,"name":"ekofrhcb"},{"lat":44.45581269247562,"lng":26.025844145849646,"name":"liuywbagxs"},{"lat":44.46206140389331,"lng":26.058288146093787,"name":"appyaayn"},{"lat":44.45078873368656,"lng":26.0424952994141,"name":"rhsn"},{"lat":44.43681740601164,"lng":26.006618071630896,"name":"vgsedan"},{"lat":44.422229736448095,"lng":25.990481902197303,"name":"vgisxtvj"},{"lat":44.414627995422435,"lng":26.01623110874027,"name":"hvorjitrbx"},{"lat":44.41266609537236,"lng":26.048846770361365,"name":"wiaqtigr"},{"lat":44.40297824911097,"lng":26.06566958530277,"name":"mhsncea"},{"lat":44.40346881153706,"lng":26.031852294043006,"name":"kmvzhjqhdj"},{"lat":44.41070412950483,"lng":26.09588198764652,"name":"bbryeys"},{"lat":44.41867420641035,"lng":26.071849394873084,"name":"xygioy"},{"lat":44.40604419678582,"lng":26.08592562778324,"name":"sqmsiqjj"},{"lat":44.42639801355065,"lng":26.109443236425818,"name":"nzjkfyqdk"},{"lat":44.43914619266125,"lng":26.116996337011756,"name":"wkzslrxzl"},{"lat":44.46451169641235,"lng":26.108069945410193,"name":"ihplumprm"},{"lat":44.4703919788565,"lng":26.100001860693396,"name":"wxgavylxs"},{"lat":44.45314372899653,"lng":26.084632873535156,"name":"azyhaseb"},{"lat":44.45017602621822,"lng":26.069102812841834,"name":"tzzjckhg"},{"lat":44.444293707483226,"lng":26.06172137363285,"name":"uprjhhvfi"},{"lat":44.443313263435776,"lng":26.02773242099613,"name":"vpyvg"},{"lat":44.43387564810446,"lng":26.030307341650428,"name":"gqijlhnss"},{"lat":44.42811427655959,"lng":26.019835997656287,"name":"aqrzomyc"},{"lat":44.423823524552255,"lng":26.007819701269568,"name":"lxvyegmuh"},{"lat":44.405676291549064,"lng":26.001983214453162,"name":"vewgnakyi"}];
+function getCloseClubs(position) {
+    getClubsJSON(position.lat, position.lng, false, false, showClubs);
 }
 
 colors = ["#037FE6", "#1AA2E6", "#366AE6", "#5998E6", "#0C2554", "#0C25B0", "#040B36", "#042536"];
@@ -172,6 +174,21 @@ function clickedRestaurant(id) {
     addMarker({coords:{lat: place.lat, lng: place.lng}});
 }
 
+function clickedHotel(id) {
+    var place = rec_hotels.find((r) => r.place_id == id);
+    addMarker({coords:{lat: place.lat, lng: place.lng}});
+}
+
+function clickedMuseum(id) {
+    var place = rec_museums.find((r) => r.place_id == id);
+    addMarker({coords:{lat: place.lat, lng: place.lng}});
+}
+
+function clickedClub(id) {
+    var place = rec_clubs.find((r) => r.place_id == id);
+    addMarker({coords:{lat: place.lat, lng: place.lng}});
+}
+
 function setupGeolocation(position) {
     getCloseHotels(position);
     getCloseMuseums(position);
@@ -181,6 +198,7 @@ function setupGeolocation(position) {
 
 function showRestaurants(items) {
     rec_restaurants = items;
+
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
     nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
@@ -200,6 +218,7 @@ function showRestaurants(items) {
 
 function showMuseums(items) {
     rec_museums = items;
+
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
     nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
@@ -209,7 +228,9 @@ function showMuseums(items) {
     for (var i = 0; i < nritems; i++) {
         museum = items[Math.abs((museum_offset + i+museum_page*nritems)%items.length)];
         document.getElementById("recommend-museums").innerHTML +=
-            '<div class="recommend-square">' + museum.name + '</div>';
+            '<a href="#" onclick="clickedMuseum(\''+museum.place_id+'\')"><div class="recommend-square"><span class="recname">' +
+            (museum.name.length > 33 ? museum.name.substring(0, 33) + '...' : museum.name) +
+            '</span><span class="recrating">Rating: ' + museum.rating +'/5</span></div></a>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-museums").innerHTML += '<button type="button" class="recommend-right" onclick="museum_page++; showMuseums(rec_museums);"><i class="fa fa-caret-right"></i></button>';
@@ -217,6 +238,7 @@ function showMuseums(items) {
 
 function showHotels(items) {
     rec_hotels = items;
+
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
     nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
@@ -226,7 +248,9 @@ function showHotels(items) {
     for (var i = 0; i < nritems; i++) {
         hotel = items[Math.abs((hotel_offset + i+hotel_page*nritems)%items.length)];
         document.getElementById("recommend-hotels").innerHTML +=
-            '<div class="recommend-square">' + hotel.name + '</div>';
+            '<a href="#" onclick="clickedHotel(\''+hotel.place_id+'\')"><div class="recommend-square"><span class="recname">' +
+            (hotel.name.length > 33 ? hotel.name.substring(0, 33) + '...' : hotel.name) +
+            '</span><span class="recrating">Rating: ' + hotel.rating +'/5</span></div></a>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-hotels").innerHTML += '<button type="button" class="recommend-right" onclick="hotel_page++; showHotels(rec_hotels);"><i class="fa fa-caret-right"></i></button>';
@@ -234,6 +258,7 @@ function showHotels(items) {
 
 function showClubs(items) {
     rec_clubs = items;
+
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
     nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
@@ -243,11 +268,14 @@ function showClubs(items) {
     for (var i = 0; i < nritems; i++) {
         club = items[Math.abs((club_offset + i+club_page*nritems)%items.length)];
         document.getElementById("recommend-clubs").innerHTML +=
-            '<div class="recommend-square">' + club.name + '</div>';
+            '<a href="#" onclick="clickedClub(\''+club.place_id+'\')"><div class="recommend-square"><span class="recname">' +
+            (club.name.length > 33 ? club.name.substring(0, 33) + '...' : club.name) +
+            '</span><span class="recrating">Rating: ' + club.rating +'/5</span></div></a>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-clubs").innerHTML += '<button type="button" class="recommend-right" onclick="club_page++; showClubs(rec_clubs);"><i class="fa fa-caret-right"></i></button>';
 }
+
 
 window.addEventListener('resize', function(){
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
@@ -267,8 +295,6 @@ window.addEventListener('resize', function(){
     showHotels(rec_hotels);
     showMuseums(rec_museums);
 }, true);
-
-setupGeolocation({lat: 44.435806, lng: 26.056298});
 
 $(document).ready(function(){
     $("#recommend-restaurants").hover(
