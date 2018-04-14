@@ -1,20 +1,19 @@
 package services;
 
-import com.mongodb.DBCursor;
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
+import com.google.gson.Gson;
+import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import static com.mongodb.client.model.Filters.*;
+
+import com.mongodb.util.JSON;
 import org.bson.Document;
 
 import javax.print.Doc;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class MongoDB {
 
@@ -62,13 +61,9 @@ public class MongoDB {
 
     public List<Document> getTripForUser(String username) {
 
-        MongoCollection<Document> collection = dataBase.getCollection("users");
-        List<String> a = new ArrayList<>();
-        a.add("radu123");
-        a.add("radu125");
-        a.add("radubest");
+        MongoCollection<Document> collection = dataBase.getCollection("trips");
 
-        FindIterable<Document> cursor = collection.find(in("username",a));
+        FindIterable<Document> cursor = collection.find(eq("username",username));
         Iterator it = cursor.iterator();
         List<Document> trips = new ArrayList<>();
 
@@ -81,5 +76,12 @@ public class MongoDB {
         return trips;
     }
 
+    public void addTripForUser(Trip trip) {
 
+        Gson gson = new Gson();
+        String json = gson.toJson(trip);
+
+        MongoCollection<Document> dbCollection = dataBase.getCollection("trips");
+        dbCollection.insertOne(Document.parse(json));
+    }
 }

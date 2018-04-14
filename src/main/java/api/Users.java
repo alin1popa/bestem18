@@ -2,10 +2,7 @@ package api;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import services.CustomException;
-import services.MongoDB;
-import services.MySQL;
-import services.User;
+import services.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -87,6 +84,17 @@ public class Users {
 
         List trips = MongoDB.getConnection().getTripForUser(username);
         return Response.ok(trips).build();
+
+    }
+
+    @Path("/trips")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addTripForUser(Trip trip) {
+
+        MongoDB.getConnection().addTripForUser(trip);
+        return Response.ok().build();
 
     }
 }
