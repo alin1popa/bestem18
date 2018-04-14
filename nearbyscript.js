@@ -18,9 +18,7 @@ function restaurantCallback(restData, callback){
         lng = data[i].geometry.location.lng;
         place_id = data[i].place_id;
         rating = data[i].rating;
-        color = Math.floor(Math.random()*colors.length - 0.01);
-
-        restaurantsInfo.push({name, lat, lng, place_id, rating, formatted_address, color})
+        restaurantsInfo.push({name, lat, lng, place_id, rating, formatted_address})
     }
     console.log(restaurantsInfo);
     callback(restaurantsInfo);

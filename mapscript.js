@@ -177,7 +177,7 @@ function setupGeolocation(position) {
 function showRestaurants(items) {
     rec_restaurants = items;
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
-    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
 
     if (items.length > nritems) document.getElementById("recommend-restaurants").innerHTML = '<button type="button" class="recommend-left" onclick="restaurant_page--; showRestaurants(rec_restaurants);"><i class="fa fa-caret-left"></i></button>';
@@ -185,7 +185,9 @@ function showRestaurants(items) {
     for (var i = 0; i < nritems; i++) {
         restaurant = items[Math.abs((restaurant_offset + i+restaurant_page*nritems)%items.length)];
         document.getElementById("recommend-restaurants").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[restaurant.color] + '">' + restaurant.name + '</div>';
+            '<div class="recommend-square"><span class="recname">' +
+            (restaurant.name.length > 33 ? restaurant.name.substring(0, 33) + '...' : restaurant.name) +
+            '</span><span class="recrating">Rating: ' + restaurant.rating +'/5</span></div>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-restaurants").innerHTML += '<button type="button" class="recommend-right" onclick="restaurant_page++; showRestaurants(rec_restaurants);"><i class="fa fa-caret-right"></i></button>';
@@ -194,7 +196,7 @@ function showRestaurants(items) {
 function showMuseums(items) {
     rec_museums = items;
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
-    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
 
     if (items.length > nritems) document.getElementById("recommend-museums").innerHTML = '<button type="button" class="recommend-left" onclick="museum_page--; showMuseums(rec_museums);"><i class="fa fa-caret-left"></i></button>';
@@ -202,7 +204,7 @@ function showMuseums(items) {
     for (var i = 0; i < nritems; i++) {
         museum = items[Math.abs((museum_offset + i+museum_page*nritems)%items.length)];
         document.getElementById("recommend-museums").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[museum.color] + '">' + museum.name + '</div>';
+            '<div class="recommend-square">' + museum.name + '</div>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-museums").innerHTML += '<button type="button" class="recommend-right" onclick="museum_page++; showMuseums(rec_museums);"><i class="fa fa-caret-right"></i></button>';
@@ -211,7 +213,7 @@ function showMuseums(items) {
 function showHotels(items) {
     rec_hotels = items;
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
-    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
 
     if (items.length > nritems) document.getElementById("recommend-hotels").innerHTML = '<button type="button" class="recommend-left" onclick="hotel_page--; showHotels(rec_hotels);"><i class="fa fa-caret-left"></i></button>';
@@ -219,7 +221,7 @@ function showHotels(items) {
     for (var i = 0; i < nritems; i++) {
         hotel = items[Math.abs((hotel_offset + i+hotel_page*nritems)%items.length)];
         document.getElementById("recommend-hotels").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[hotel.color] + '">' + hotel.name + '</div>';
+            '<div class="recommend-square">' + hotel.name + '</div>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-hotels").innerHTML += '<button type="button" class="recommend-right" onclick="hotel_page++; showHotels(rec_hotels);"><i class="fa fa-caret-right"></i></button>';
@@ -228,7 +230,7 @@ function showHotels(items) {
 function showClubs(items) {
     rec_clubs = items;
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
-    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     if (items.length < nritems) nritems = items.length;
 
     if (items.length > nritems) document.getElementById("recommend-clubs").innerHTML = '<button type="button" class="recommend-left" onclick="club_page--; showClubs(rec_clubs);"><i class="fa fa-caret-left"></i></button>';
@@ -236,7 +238,7 @@ function showClubs(items) {
     for (var i = 0; i < nritems; i++) {
         club = items[Math.abs((club_offset + i+club_page*nritems)%items.length)];
         document.getElementById("recommend-clubs").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[club.color] + '">' + club.name + '</div>';
+            '<div class="recommend-square">' + club.name + '</div>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-clubs").innerHTML += '<button type="button" class="recommend-right" onclick="club_page++; showClubs(rec_clubs);"><i class="fa fa-caret-right"></i></button>';
@@ -244,7 +246,7 @@ function showClubs(items) {
 
 window.addEventListener('resize', function(){
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
-    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 170);
     restaurant_offset += nritems * restaurant_page;
     museum_offset += nritems * museum_page;
     club_offset += nritems * club_page;
@@ -260,6 +262,8 @@ window.addEventListener('resize', function(){
     showHotels(rec_hotels);
     showMuseums(rec_museums);
 }, true);
+
+setupGeolocation({lat: 44.435806, lng: 26.056298});
 
 $(document).ready(function(){
     $("#recommend-restaurants").hover(

@@ -128,7 +128,7 @@ html, body {
 
 .recommend-square {
     height: 80px;
-    width: 80px;
+    width: 160px;
     float: left;
     margin-left: auto;
     margin-right: auto;
@@ -136,9 +136,26 @@ html, body {
     font-weight: 400;
     font-size: 12px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center
+    background-color: #193954;
+    position: relative;
+    padding: 7px;
+}
+
+.recname {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    position: absolute;
+    top: 15px;
+    width: 146px;
+}
+
+.recrating {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 146px;
 }
 
 .recommend-left {
