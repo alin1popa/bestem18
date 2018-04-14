@@ -28,6 +28,12 @@ function addMarker(props){
             infoWindow.open(map, marker);
         });
     }
+
+    pins.push({
+        lat: props.coords.lat(),
+        lng: props.coords.lng()
+    });
+    localStorage['pins'] = JSON.stringify(pins);
 }
 
 
@@ -74,7 +80,9 @@ function initAutocomplete() {
     // Listen for click on map
     google.maps.event.addListener(map, 'click', function(event){
         // Add marker
-        addMarker({coords:event.latLng});
+        //console.log(event);
+        if (event.latLng)
+            addMarker({coords:event.latLng});
     });
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -149,7 +157,7 @@ function initAutocomplete() {
             });
             google.maps.event.addListener(mark, 'click', function(event){
                 // Add marker
-                addMarker({coords:event.latLng});
+                addMarker({coords: place.geometry.location});
             });
             markers.push(mark);
 
@@ -200,22 +208,22 @@ club_offset = 0;
 
 function clickedRestaurant(id) {
     var place = rec_restaurants.find((r) => r.place_id == id);
-    addMarker({coords:{lat: place.lat, lng: place.lng}});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
 }
 
 function clickedHotel(id) {
     var place = rec_hotels.find((r) => r.place_id == id);
-    addMarker({coords:{lat: place.lat, lng: place.lng}});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
 }
 
 function clickedMuseum(id) {
     var place = rec_museums.find((r) => r.place_id == id);
-    addMarker({coords:{lat: place.lat, lng: place.lng}});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
 }
 
 function clickedClub(id) {
     var place = rec_clubs.find((r) => r.place_id == id);
-    addMarker({coords:{lat: place.lat, lng: place.lng}});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
 }
 
 function setupGeolocation(position) {
