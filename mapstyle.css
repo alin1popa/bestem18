@@ -152,3 +152,19 @@ html, body {
     height: 80px;
     float: right;
 }
+
+.tl-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 100px;
+
+    width: 50%;
+    height: 100px;
+
+    color: #193954;
+    z-index: 2;
+
+    background-color: lightgray;
+
+    opacity: 0.4;
+}

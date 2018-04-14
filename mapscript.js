@@ -260,3 +260,14 @@ window.addEventListener('resize', function(){
     showHotels(rec_hotels);
     showMuseums(rec_museums);
 }, true);
+
+$(document).ready(function(){
+    $("#recommend-restaurants").hover(
+        function() {
+            $("#tl-overlay").css("display", "block");
+        },
+        function() {
+            $("#tl-overlay").css("display", "none");
+        }
+    );
+});
