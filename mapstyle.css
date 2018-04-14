@@ -83,8 +83,11 @@ html, body {
 .recommend-section {
     height: 100%;
     width: 50%;
-    display: inline-block;
     float: left;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
 }
 
 .border-tl-tr {
@@ -121,4 +124,30 @@ html, body {
     height: 1px;
     width: calc(50% - 20px);
     border-bottom: 1px solid lightgray;
+}
+
+.recommend-square {
+    height: 80px;
+    width: 80px;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-weight: 400;
+
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.recommend-left {
+    width: 25px;
+    height: 80px;
+    float: left;
+}
+
+.recommend-right {
+    width: 25px;
+    height: 80px;
+    float: right;
 }
