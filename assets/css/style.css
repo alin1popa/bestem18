@@ -52,6 +52,7 @@ img { max-width: 100%; }
 	margin-bottom: 0;
 	background: #193954;
 	border: 0;
+	height: 60px;
 	-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
 	-o-transition: all .6s; -moz-transition: all .6s; -webkit-transition: all .6s; -ms-transition: all .6s; transition: all .6s;
 }
@@ -92,7 +93,7 @@ ul.navbar-nav {
 .call-to-action-button {
 	font-weight: 400;
 	font-family: 'Roboto', sans-serif;
-	font-size: 22px;
+	font-size: 20px;
 	background-color: #028FFB;
 	border-radius: 30px;
 	padding: 6px 20px 6px 20px;
