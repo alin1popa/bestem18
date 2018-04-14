@@ -264,10 +264,37 @@ window.addEventListener('resize', function(){
 $(document).ready(function(){
     $("#recommend-restaurants").hover(
         function() {
-            $("#tl-overlay").css("display", "block");
+            $("#tl-overlay").css("opacity", "0");
         },
         function() {
-            $("#tl-overlay").css("display", "none");
+            $("#tl-overlay").css("opacity", "0.75");
+        }
+    );
+
+    $("#recommend-hotels").hover(
+        function() {
+            $("#tr-overlay").css("opacity", "0");
+        },
+        function() {
+            $("#tr-overlay").css("opacity", "0.75");
+        }
+    );
+
+    $("#recommend-museums").hover(
+        function() {
+            $("#bl-overlay").css("opacity", "0");
+        },
+        function() {
+            $("#bl-overlay").css("opacity", "0.75");
+        }
+    );
+
+    $("#recommend-clubs").hover(
+        function() {
+            $("#br-overlay").css("opacity", "0");
+        },
+        function() {
+            $("#br-overlay").css("opacity", "0.75");
         }
     );
 });

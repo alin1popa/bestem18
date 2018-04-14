@@ -11,7 +11,7 @@
     //if you wanna checck if they're opened
     //if result is null and you have openedNow = true, print message "No museums opened at the time. Try back tomorrow"
     function getMuseumJSON(locationLat, locationLong, openedNow, ratingSorted) {
-        $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=museum&location=' + locationLat + ',' +  + (openedNow ?  '&opennow' : '') + locationLong + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (result) =>museumCallback(ratingSorted, result) );
+        $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=museum&location=' + locationLat + ',' + locationLong + (openedNow ?  '&opennow' : '') + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (result) =>museumCallback(ratingSorted, result) );
     }
 
     function compare(a, b) {

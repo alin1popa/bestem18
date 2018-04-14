@@ -153,18 +153,43 @@ html, body {
     float: right;
 }
 
-.tl-overlay {
+.overlay {
     position: absolute;
-    left: 0;
-    bottom: 100px;
-
-    width: 50%;
     height: 100px;
 
-    color: #193954;
+    width: 50%;
     z-index: 2;
 
-    background-color: lightgray;
+    background-color: #193954;
+    pointer-events: none;
 
-    opacity: 0.4;
+    opacity: 0.75;
+    padding: 12px;
+
+    -webkit-transition: opacity 0.4s; /* Safari */
+    transition: opacity 0.4s;
+}
+
+.overlay h1 {
+    color: #EDF7FF;
+}
+
+.tl-overlay {
+    left: 0;
+    bottom: 100px;
+}
+
+.tr-overlay {
+    right: 0;
+    bottom: 100px;
+}
+
+.bl-overlay {
+    left: 0;
+    bottom: 0;
+}
+
+.br-overlay {
+    right: 0;
+    bottom: 0;
 }
