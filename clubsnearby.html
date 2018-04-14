@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Restaurants</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+	//the places that dont have opennow specified wont be displayed
+	//rankby can be prominence (ranking) or distance (obvious one)
+	//locationCoord = {lat, long}
+	//keyword = can be vegan or a street name
+	// icon pt restaurant aici https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png
+    function getClubsJSON(locationLat,locationLong,openedNow, ratingSorted){
+        $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=night_club&location=' + locationLat + ',' + locationLong + (openedNow ?  '&opennow' : '') + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (result) => clubsCallback(ratingSorted, result ));
+    }
+
+
+    function compare(a, b) {
+        var fstElem = a.rating;
+        var sndElem = b.rating;
+
+        comp = 0;
+        if (fstElem < sndElem) {
+            comp = 1;
+        } else if (fstElem > sndElem) {
+            comp = -1;
+        }
+
+        return comp;
+    }
+
+
+    function clubsCallback(ratingSorted, clubsData){
+    	var res = clubsData;
+        console.log(res.results)
+        if (res.status == "ZERO_RESULTS"){
+           return null;
+        } else {
+            data = res.results;
+        	clubsInfo = [];
+        	var name, formatted_address, place_id, rating, location;
+        	for (var i = 0; i < 20; i++){
+        		name = data[i].name;
+        		formatted_address = data[i].formatted_address;
+        		latCoord = data[i].geometry.location.lat;
+        		longCoord = data[i].geometry.location.lng;
+        		place_id = data[i].place_id;
+        		rating = data[i].rating;
+
+        		clubsInfo.push({name, latCoord, longCoord, place_id, rating, formatted_address})
+        	}
+
+            if (ratingSorted == true) {
+                clubsInfo.sort(compare)
+            }
+        	console.log(clubsInfo);
+        }
+    }
+
+    </script>
+</head>
+<body>
+<!-- Converts 1 EURO to RON  -->
+<button id = "getIt" onclick = "getClubsJSON(44.4430619, 26.0513738,true, true)">Get JSON</button>
+</body>
+</html>
