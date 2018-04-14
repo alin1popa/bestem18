@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Restaurants</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+	//the places that dont have opennow specified wont be displayed
+	//rankby can be prominence (ranking) or distance (obvious one)
+	//locationCoord = {lat, long}
+	//keyword = can be vegan or a street name
+	// icon pt restaurant aici https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png
+    function getRestaurantsJSON(locationLat,locationLong, keyword, opennow, rankby){
+        $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=restaurant&location=' + locationLat + ',' + locationLong + (keyword ? ("&keyword=" + keyword) : '') + (opennow ?  '&opennow' : '') + (rankby ? ("&rankby=" + rankby) : '') + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', restaurantCallback );
+    }
+
+
+    function restaurantCallback(restData){
+    	var data = restData.results;
+    	restaurantsInfo = [];
+    	var name, formatted_address, place_id, rating, location;
+    	for (var i = 0; i < 20; i++){
+    		//console.log(data[i]);
+    		name = data[i].name;
+    		formatted_address = data[i].formatted_address;
+    		latCoord = data[i].geometry.location.lat;
+    		longCoord = data[i].geometry.location.lng;
+    		place_id = data[i].place_id;
+    		rating = data[i].rating;
+
+    		restaurantsInfo.push({name, latCoord, longCoord, place_id, rating, formatted_address})
+    	}
+    	console.log(restaurantsInfo);
+    }
+
+    </script>
+</head>
+<body>
+<!-- Converts 1 EURO to RON  -->
+<button id = "getIt" onclick = "getRestaurantsJSON(44.4430619, 26.0513738, '', '', 'prominence')">Get JSON</button>
+</body>
+</html>
