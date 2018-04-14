@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Weather</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    function getWeatherJSON(){
+        $.getJSON('http://api.apixu.com/v1/forecast.json?key=0e7686e48230480abbf113252181404&q=Bucharest&days=10', weatherCallback);
+        
+    }
+
+    function weatherCallback(weatherdata){
+    	var apiDetails = weatherdata.forecast;
+    	var forecast = [];
+    	console.log(apiDetails)
+    	var weatherState,  date, avgTemp, maxTemp;
+
+    	for (var i = 0; i < 7; i++){
+    		date = apiDetails.forecastday[i].date;
+    		avgTemp = apiDetails.forecastday[i].day.avgtemp_c;
+    		maxTemp = apiDetails.forecastday[i].day.maxtemp_c;
+    		weatherState = apiDetails.forecastday[i].day.condition.text;
+
+    		
+
+    		forecast.push({date, avgTemp, maxTemp, weatherState })
+    	}
+
+    	console.log(forecast)
+    	document.write(weatherdata.location);
+    }
+
+    </script>
+</head>
+<body>
+<button id = "getIt" onclick = "getWeatherJSON()">Get JSON</button>
+</body>
+</html>
