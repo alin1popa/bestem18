@@ -1,10 +1,12 @@
+var apikey = "AIzaSyBzPV7qe_5PM3kg1KfVf5atnNyQD0THl_M";
+
 //the places that dont have opennow specified wont be displayed
 //rankby can be prominence (ranking) or distance (obvious one)
 //locationCoord = {lat, long}
 //keyword = can be vegan or a street name
 // icon pt restaurant aici https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png
 function getRestaurantsJSON(locationLat,locationLong, keyword, opennow, rankby, callback){
-    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=restaurant&location=' + locationLat + ',' + locationLong + (keyword ? ("&keyword=" + keyword) : '') + (opennow ?  '&opennow' : '') + (rankby ? ("&rankby=" + rankby) : '') + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (res) => restaurantCallback(res, callback) );
+    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=restaurant&location=' + locationLat + ',' + locationLong + (keyword ? ("&keyword=" + keyword) : '') + (opennow ?  '&opennow' : '') + (rankby ? ("&rankby=" + rankby) : '') + '&key='+apikey, (res) => restaurantCallback(res, callback) );
 }
 restaurantsInfo = [];
 function restaurantCallback(restData, callback){
@@ -31,7 +33,7 @@ function restaurantCallback(restData, callback){
 //if you wanna checck if they're opened
 //if result is null and you have openedNow = true, print message "No museums opened at the time. Try back tomorrow"
 function getMuseumsJSON(locationLat, locationLong, openedNow, ratingSorted, callback) {
-    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=museum&location=' + locationLat + ',' + locationLong + (openedNow ?  '&opennow' : '') + '&key=AIzaSyBcm1naJn-_yGQ0-lkjAKTehiJsDn_fPNY', (result) =>museumCallback(ratingSorted, result, callback) );
+    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=museum&location=' + locationLat + ',' + locationLong + (openedNow ?  '&opennow' : '') + '&key='+apikey, (result) =>museumCallback(ratingSorted, result, callback) );
 }
 
 function compare(a, b) {
@@ -81,7 +83,7 @@ function museumCallback(ratingSorted, restData, callback){
 //locationCoord = {lat, long}
 //if ratingSorted = true, you sort the elems by rating
 function getlodgingJSON(locationLat,locationLong,ratingSorted,callback) {
-    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=lodging&name=hotel&location=' + locationLat + ',' + locationLong + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (result) =>lodgingCallback(ratingSorted, result, callback) );
+    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=lodging&name=hotel&location=' + locationLat + ',' + locationLong + '&key='+apikey, (result) =>lodgingCallback(ratingSorted, result, callback) );
 }
 
 function compare(a, b) {
@@ -127,7 +129,7 @@ function lodgingCallback(ratingSorted, restData, callback){
 //keyword = can be vegan or a street name
 // icon pt restaurant aici https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png
 function getClubsJSON(locationLat,locationLong,openedNow, ratingSorted, callback){
-    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=night_club&location=' + locationLat + ',' + locationLong + (openedNow ?  '&opennow' : '') + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (result) => clubsCallback(ratingSorted, result, callback));
+    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=night_club&location=' + locationLat + ',' + locationLong + (openedNow ?  '&opennow' : '') + '&key='+apikey, (result) => clubsCallback(ratingSorted, result, callback));
 }
 
 
@@ -148,7 +150,7 @@ function compare(a, b) {
 
 function clubsCallback(ratingSorted, clubsData, callback){
     var res = clubsData;
-//    console.log(res.results)
+    // console.log(res.results)
     if (res.status == "ZERO_RESULTS"){
         return null;
     } else {
@@ -169,7 +171,7 @@ function clubsCallback(ratingSorted, clubsData, callback){
         if (ratingSorted == true) {
             clubsInfo.sort(compare)
         }
-        //console.log(clubsInfo);
+        // console.log(clubsInfo);
         callback(clubsInfo);
     }
 }
