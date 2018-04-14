@@ -167,6 +167,11 @@ museum_offset = 0;
 restaurant_offset = 0;
 club_offset = 0;
 
+function clickedRestaurant(id) {
+    var place = rec_restaurants.find((r) => r.place_id == id);
+    addMarker({coords:{lat: place.lat, lng: place.lng}});
+}
+
 function setupGeolocation(position) {
     getCloseHotels(position);
     getCloseMuseums(position);
@@ -185,9 +190,9 @@ function showRestaurants(items) {
     for (var i = 0; i < nritems; i++) {
         restaurant = items[Math.abs((restaurant_offset + i+restaurant_page*nritems)%items.length)];
         document.getElementById("recommend-restaurants").innerHTML +=
-            '<div class="recommend-square"><span class="recname">' +
+            '<a href="#" onclick="clickedRestaurant(\''+restaurant.place_id+'\')"><div class="recommend-square"><span class="recname">' +
             (restaurant.name.length > 33 ? restaurant.name.substring(0, 33) + '...' : restaurant.name) +
-            '</span><span class="recrating">Rating: ' + restaurant.rating +'/5</span></div>';
+            '</span><span class="recrating">Rating: ' + restaurant.rating +'/5</span></div></a>';
     };
 
     if (items.length > nritems) document.getElementById("recommend-restaurants").innerHTML += '<button type="button" class="recommend-right" onclick="restaurant_page++; showRestaurants(rec_restaurants);"><i class="fa fa-caret-right"></i></button>';
