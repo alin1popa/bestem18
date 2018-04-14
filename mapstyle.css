@@ -134,6 +134,7 @@ html, body {
     margin-right: auto;
     color: white;
     font-weight: 400;
+    font-size: 12px;
 
     display: flex;
     align-items: center;

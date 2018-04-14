@@ -136,20 +136,20 @@ function initAutocomplete() {
 }
 
 function getCloseHotels() {
-    return [{"lat":44.430715352415525,"lng":26.05184555053711,"name":"hqqbgew"},{"lat":44.44137909691852,"lng":26.097164154052734,"name":"poamrzb"},{"lat":44.42752810855755,"lng":26.087207794189453,"name":"srqsajvxe"},{"lat":44.42090789289679,"lng":26.031246185302734,"name":"ghamoq"},{"lat":44.44662219614843,"lng":26.001983214453162,"name":"mfkqpbvad"},{"lat":44.46573680410561,"lng":26.03271060092777,"name":"ekofrhcb"},{"lat":44.45581269247562,"lng":26.025844145849646,"name":"liuywbagxs"},{"lat":44.46206140389331,"lng":26.058288146093787,"name":"appyaayn"},{"lat":44.45078873368656,"lng":26.0424952994141,"name":"rhsn"},{"lat":44.43681740601164,"lng":26.006618071630896,"name":"vgsedan"},{"lat":44.422229736448095,"lng":25.990481902197303,"name":"vgisxtvj"},{"lat":44.414627995422435,"lng":26.01623110874027,"name":"hvorjitrbx"},{"lat":44.41266609537236,"lng":26.048846770361365,"name":"wiaqtigr"},{"lat":44.40297824911097,"lng":26.06566958530277,"name":"mhsncea"},{"lat":44.40346881153706,"lng":26.031852294043006,"name":"kmvzhjqhdj"},{"lat":44.41070412950483,"lng":26.09588198764652,"name":"bbryeys"},{"lat":44.41867420641035,"lng":26.071849394873084,"name":"xygioy"},{"lat":44.40604419678582,"lng":26.08592562778324,"name":"sqmsiqjj"},{"lat":44.42639801355065,"lng":26.109443236425818,"name":"nzjkfyqdk"},{"lat":44.43914619266125,"lng":26.116996337011756,"name":"wkzslrxzl"},{"lat":44.46451169641235,"lng":26.108069945410193,"name":"ihplumprm"},{"lat":44.4703919788565,"lng":26.100001860693396,"name":"wxgavylxs"},{"lat":44.45314372899653,"lng":26.084632873535156,"name":"azyhaseb"},{"lat":44.45017602621822,"lng":26.069102812841834,"name":"tzzjckhg"},{"lat":44.444293707483226,"lng":26.06172137363285,"name":"uprjhhvfi"},{"lat":44.443313263435776,"lng":26.02773242099613,"name":"vpyvg"},{"lat":44.43387564810446,"lng":26.030307341650428,"name":"gqijlhnss"},{"lat":44.42811427655959,"lng":26.019835997656287,"name":"aqrzomyc"},{"lat":44.423823524552255,"lng":26.007819701269568,"name":"lxvyegmuh"},{"lat":44.405676291549064,"lng":26.001983214453162,"name":"vewgnakyi"}];
 }
 
 function getCloseMuseums() {
-    return [{"lat":44.430715352415525,"lng":26.05184555053711,"name":"hqqbgew"},{"lat":44.44137909691852,"lng":26.097164154052734,"name":"poamrzb"},{"lat":44.42752810855755,"lng":26.087207794189453,"name":"srqsajvxe"},{"lat":44.42090789289679,"lng":26.031246185302734,"name":"ghamoq"},{"lat":44.44662219614843,"lng":26.001983214453162,"name":"mfkqpbvad"},{"lat":44.46573680410561,"lng":26.03271060092777,"name":"ekofrhcb"},{"lat":44.45581269247562,"lng":26.025844145849646,"name":"liuywbagxs"},{"lat":44.46206140389331,"lng":26.058288146093787,"name":"appyaayn"},{"lat":44.45078873368656,"lng":26.0424952994141,"name":"rhsn"},{"lat":44.43681740601164,"lng":26.006618071630896,"name":"vgsedan"},{"lat":44.422229736448095,"lng":25.990481902197303,"name":"vgisxtvj"},{"lat":44.414627995422435,"lng":26.01623110874027,"name":"hvorjitrbx"},{"lat":44.41266609537236,"lng":26.048846770361365,"name":"wiaqtigr"},{"lat":44.40297824911097,"lng":26.06566958530277,"name":"mhsncea"},{"lat":44.40346881153706,"lng":26.031852294043006,"name":"kmvzhjqhdj"},{"lat":44.41070412950483,"lng":26.09588198764652,"name":"bbryeys"},{"lat":44.41867420641035,"lng":26.071849394873084,"name":"xygioy"},{"lat":44.40604419678582,"lng":26.08592562778324,"name":"sqmsiqjj"},{"lat":44.42639801355065,"lng":26.109443236425818,"name":"nzjkfyqdk"},{"lat":44.43914619266125,"lng":26.116996337011756,"name":"wkzslrxzl"},{"lat":44.46451169641235,"lng":26.108069945410193,"name":"ihplumprm"},{"lat":44.4703919788565,"lng":26.100001860693396,"name":"wxgavylxs"},{"lat":44.45314372899653,"lng":26.084632873535156,"name":"azyhaseb"},{"lat":44.45017602621822,"lng":26.069102812841834,"name":"tzzjckhg"},{"lat":44.444293707483226,"lng":26.06172137363285,"name":"uprjhhvfi"},{"lat":44.443313263435776,"lng":26.02773242099613,"name":"vpyvg"},{"lat":44.43387564810446,"lng":26.030307341650428,"name":"gqijlhnss"},{"lat":44.42811427655959,"lng":26.019835997656287,"name":"aqrzomyc"},{"lat":44.423823524552255,"lng":26.007819701269568,"name":"lxvyegmuh"},{"lat":44.405676291549064,"lng":26.001983214453162,"name":"vewgnakyi"}];
 }
 
-function getCloseRestaurants() {
-    return [{"lat":44.430715352415525,"lng":26.05184555053711,"name":"hqqbgew"},{"lat":44.44137909691852,"lng":26.097164154052734,"name":"poamrzb"},{"lat":44.42752810855755,"lng":26.087207794189453,"name":"srqsajvxe"},{"lat":44.42090789289679,"lng":26.031246185302734,"name":"ghamoq"},{"lat":44.44662219614843,"lng":26.001983214453162,"name":"mfkqpbvad"},{"lat":44.46573680410561,"lng":26.03271060092777,"name":"ekofrhcb"},{"lat":44.45581269247562,"lng":26.025844145849646,"name":"liuywbagxs"},{"lat":44.46206140389331,"lng":26.058288146093787,"name":"appyaayn"},{"lat":44.45078873368656,"lng":26.0424952994141,"name":"rhsn"},{"lat":44.43681740601164,"lng":26.006618071630896,"name":"vgsedan"},{"lat":44.422229736448095,"lng":25.990481902197303,"name":"vgisxtvj"},{"lat":44.414627995422435,"lng":26.01623110874027,"name":"hvorjitrbx"},{"lat":44.41266609537236,"lng":26.048846770361365,"name":"wiaqtigr"},{"lat":44.40297824911097,"lng":26.06566958530277,"name":"mhsncea"},{"lat":44.40346881153706,"lng":26.031852294043006,"name":"kmvzhjqhdj"},{"lat":44.41070412950483,"lng":26.09588198764652,"name":"bbryeys"},{"lat":44.41867420641035,"lng":26.071849394873084,"name":"xygioy"},{"lat":44.40604419678582,"lng":26.08592562778324,"name":"sqmsiqjj"},{"lat":44.42639801355065,"lng":26.109443236425818,"name":"nzjkfyqdk"},{"lat":44.43914619266125,"lng":26.116996337011756,"name":"wkzslrxzl"},{"lat":44.46451169641235,"lng":26.108069945410193,"name":"ihplumprm"},{"lat":44.4703919788565,"lng":26.100001860693396,"name":"wxgavylxs"},{"lat":44.45314372899653,"lng":26.084632873535156,"name":"azyhaseb"},{"lat":44.45017602621822,"lng":26.069102812841834,"name":"tzzjckhg"},{"lat":44.444293707483226,"lng":26.06172137363285,"name":"uprjhhvfi"},{"lat":44.443313263435776,"lng":26.02773242099613,"name":"vpyvg"},{"lat":44.43387564810446,"lng":26.030307341650428,"name":"gqijlhnss"},{"lat":44.42811427655959,"lng":26.019835997656287,"name":"aqrzomyc"},{"lat":44.423823524552255,"lng":26.007819701269568,"name":"lxvyegmuh"},{"lat":44.405676291549064,"lng":26.001983214453162,"name":"vewgnakyi"}];
+function getCloseRestaurants(position) {
+    return getRestaurantsJSON(position.lat, position.lng, '', '', 'distance', showRestaurants);
 }
 
 function getCloseClubs() {
-    return [{"lat":44.430715352415525,"lng":26.05184555053711,"name":"hqqbgew"},{"lat":44.44137909691852,"lng":26.097164154052734,"name":"poamrzb"},{"lat":44.42752810855755,"lng":26.087207794189453,"name":"srqsajvxe"},{"lat":44.42090789289679,"lng":26.031246185302734,"name":"ghamoq"},{"lat":44.44662219614843,"lng":26.001983214453162,"name":"mfkqpbvad"},{"lat":44.46573680410561,"lng":26.03271060092777,"name":"ekofrhcb"},{"lat":44.45581269247562,"lng":26.025844145849646,"name":"liuywbagxs"},{"lat":44.46206140389331,"lng":26.058288146093787,"name":"appyaayn"},{"lat":44.45078873368656,"lng":26.0424952994141,"name":"rhsn"},{"lat":44.43681740601164,"lng":26.006618071630896,"name":"vgsedan"},{"lat":44.422229736448095,"lng":25.990481902197303,"name":"vgisxtvj"},{"lat":44.414627995422435,"lng":26.01623110874027,"name":"hvorjitrbx"},{"lat":44.41266609537236,"lng":26.048846770361365,"name":"wiaqtigr"},{"lat":44.40297824911097,"lng":26.06566958530277,"name":"mhsncea"},{"lat":44.40346881153706,"lng":26.031852294043006,"name":"kmvzhjqhdj"},{"lat":44.41070412950483,"lng":26.09588198764652,"name":"bbryeys"},{"lat":44.41867420641035,"lng":26.071849394873084,"name":"xygioy"},{"lat":44.40604419678582,"lng":26.08592562778324,"name":"sqmsiqjj"},{"lat":44.42639801355065,"lng":26.109443236425818,"name":"nzjkfyqdk"},{"lat":44.43914619266125,"lng":26.116996337011756,"name":"wkzslrxzl"},{"lat":44.46451169641235,"lng":26.108069945410193,"name":"ihplumprm"},{"lat":44.4703919788565,"lng":26.100001860693396,"name":"wxgavylxs"},{"lat":44.45314372899653,"lng":26.084632873535156,"name":"azyhaseb"},{"lat":44.45017602621822,"lng":26.069102812841834,"name":"tzzjckhg"},{"lat":44.444293707483226,"lng":26.06172137363285,"name":"uprjhhvfi"},{"lat":44.443313263435776,"lng":26.02773242099613,"name":"vpyvg"},{"lat":44.43387564810446,"lng":26.030307341650428,"name":"gqijlhnss"},{"lat":44.42811427655959,"lng":26.019835997656287,"name":"aqrzomyc"},{"lat":44.423823524552255,"lng":26.007819701269568,"name":"lxvyegmuh"},{"lat":44.405676291549064,"lng":26.001983214453162,"name":"vewgnakyi"}];
+   // return [{"lat":44.430715352415525,"lng":26.05184555053711,"name":"hqqbgew"},{"lat":44.44137909691852,"lng":26.097164154052734,"name":"poamrzb"},{"lat":44.42752810855755,"lng":26.087207794189453,"name":"srqsajvxe"},{"lat":44.42090789289679,"lng":26.031246185302734,"name":"ghamoq"},{"lat":44.44662219614843,"lng":26.001983214453162,"name":"mfkqpbvad"},{"lat":44.46573680410561,"lng":26.03271060092777,"name":"ekofrhcb"},{"lat":44.45581269247562,"lng":26.025844145849646,"name":"liuywbagxs"},{"lat":44.46206140389331,"lng":26.058288146093787,"name":"appyaayn"},{"lat":44.45078873368656,"lng":26.0424952994141,"name":"rhsn"},{"lat":44.43681740601164,"lng":26.006618071630896,"name":"vgsedan"},{"lat":44.422229736448095,"lng":25.990481902197303,"name":"vgisxtvj"},{"lat":44.414627995422435,"lng":26.01623110874027,"name":"hvorjitrbx"},{"lat":44.41266609537236,"lng":26.048846770361365,"name":"wiaqtigr"},{"lat":44.40297824911097,"lng":26.06566958530277,"name":"mhsncea"},{"lat":44.40346881153706,"lng":26.031852294043006,"name":"kmvzhjqhdj"},{"lat":44.41070412950483,"lng":26.09588198764652,"name":"bbryeys"},{"lat":44.41867420641035,"lng":26.071849394873084,"name":"xygioy"},{"lat":44.40604419678582,"lng":26.08592562778324,"name":"sqmsiqjj"},{"lat":44.42639801355065,"lng":26.109443236425818,"name":"nzjkfyqdk"},{"lat":44.43914619266125,"lng":26.116996337011756,"name":"wkzslrxzl"},{"lat":44.46451169641235,"lng":26.108069945410193,"name":"ihplumprm"},{"lat":44.4703919788565,"lng":26.100001860693396,"name":"wxgavylxs"},{"lat":44.45314372899653,"lng":26.084632873535156,"name":"azyhaseb"},{"lat":44.45017602621822,"lng":26.069102812841834,"name":"tzzjckhg"},{"lat":44.444293707483226,"lng":26.06172137363285,"name":"uprjhhvfi"},{"lat":44.443313263435776,"lng":26.02773242099613,"name":"vpyvg"},{"lat":44.43387564810446,"lng":26.030307341650428,"name":"gqijlhnss"},{"lat":44.42811427655959,"lng":26.019835997656287,"name":"aqrzomyc"},{"lat":44.423823524552255,"lng":26.007819701269568,"name":"lxvyegmuh"},{"lat":44.405676291549064,"lng":26.001983214453162,"name":"vewgnakyi"}];
 }
+
+colors = ["#037FE6", "#1AA2E6", "#366AE6", "#5998E6", "#0C2554", "#0C25B0", "#040B36", "#042536"];
 
 rec_hotels = [];
 rec_museums = [];
@@ -160,57 +160,103 @@ hotel_page = 0;
 museum_page = 0;
 restaurant_page = 0;
 club_page = 0;
-
-colors = ["#037FE6", "#1AA2E6", "#366AE6", "#5998E6", "#0C2554", "#0C25B0", "#040B36", "#042536"];
 nritems = 0;
 
-function setupGeolocation(position) {
-    rec_hotels = getCloseHotels();
-    rec_museums = getCloseMuseums();
-    rec_restaurants = getCloseRestaurants();
-    rec_clubs = getCloseClubs();
+hotel_offset = 0;
+museum_offset = 0;
+restaurant_offset = 0;
+club_offset = 0;
 
-    applySuggestions();
+function setupGeolocation(position) {
+    getCloseHotels(position);
+    getCloseMuseums(position);
+    getCloseRestaurants(position);
+    getCloseClubs(position);
 }
 
-function applySuggestions() {
+function showRestaurants(items) {
+    rec_restaurants = items;
     var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
     nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
-    console.log(nritems);
+    if (items.length < nritems) nritems = items.length;
 
-    document.getElementById("recommend-hotels").innerHTML = '<button type="button" class="recommend-left"><i class="fa fa-caret-left"></i></button>';
-    document.getElementById("recommend-museums").innerHTML = '<button type="button" class="recommend-left"><i class="fa fa-caret-left"></i></button>';
-    document.getElementById("recommend-restaurants").innerHTML = '<button type="button" class="recommend-left"><i class="fa fa-caret-left"></i></button>';
-    document.getElementById("recommend-clubs").innerHTML = '<button type="button" class="recommend-left"><i class="fa fa-caret-left"></i></button>';
+    if (items.length > nritems) document.getElementById("recommend-restaurants").innerHTML = '<button type="button" class="recommend-left" onclick="restaurant_page--; showRestaurants(rec_restaurants);"><i class="fa fa-caret-left"></i></button>';
 
     for (var i = 0; i < nritems; i++) {
-        hotel = rec_hotels[i+hotel_page*nritems];
-        document.getElementById("recommend-hotels").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[Math.floor(Math.random()*colors.length - 0.01)] + '">' + hotel.name + '</div>';
-
-        museum = rec_museums[i+museum_page*nritems];
-        document.getElementById("recommend-museums").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[Math.floor(Math.random()*colors.length - 0.01)] + '">' + museum.name + '</div>';
-
-        restaurant = rec_restaurants[i+restaurant_page*nritems];
+        restaurant = items[Math.abs((restaurant_offset + i+restaurant_page*nritems)%items.length)];
         document.getElementById("recommend-restaurants").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[Math.floor(Math.random()*colors.length - 0.01)] + '">' + restaurant.name + '</div>';
-
-        club = rec_clubs[i+club_page*nritems];
-        document.getElementById("recommend-clubs").innerHTML +=
-            '<div class="recommend-square" style="background-color: ' + colors[Math.floor(Math.random()*colors.length - 0.01)] + '">' + club.name + '</div>';
+            '<div class="recommend-square" style="background-color: ' + colors[restaurant.color] + '">' + restaurant.name + '</div>';
     };
 
-
-    document.getElementById("recommend-hotels").innerHTML += '<button type="button" class="recommend-right"><i class="fa fa-caret-right"></i></button>';
-    document.getElementById("recommend-museums").innerHTML += '<button type="button" class="recommend-right"><i class="fa fa-caret-right"></i></button>';
-    document.getElementById("recommend-restaurants").innerHTML += '<button type="button" class="recommend-right"><i class="fa fa-caret-right"></i></button>';
-    document.getElementById("recommend-clubs").innerHTML += '<button type="button" class="recommend-right"><i class="fa fa-caret-right"></i></button>';
-
+    if (items.length > nritems) document.getElementById("recommend-restaurants").innerHTML += '<button type="button" class="recommend-right" onclick="restaurant_page++; showRestaurants(rec_restaurants);"><i class="fa fa-caret-right"></i></button>';
 }
 
-setupGeolocation();
+function showMuseums(items) {
+    rec_museums = items;
+    var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    if (items.length < nritems) nritems = items.length;
+
+    if (items.length > nritems) document.getElementById("recommend-museums").innerHTML = '<button type="button" class="recommend-left" onclick="museum_page--; showMuseums(rec_museums);"><i class="fa fa-caret-left"></i></button>';
+
+    for (var i = 0; i < nritems; i++) {
+        museum = items[Math.abs((museum_offset + i+museum_page*nritems)%items.length)];
+        document.getElementById("recommend-museums").innerHTML +=
+            '<div class="recommend-square" style="background-color: ' + colors[museum.color] + '">' + museum.name + '</div>';
+    };
+
+    if (items.length > nritems) document.getElementById("recommend-museums").innerHTML += '<button type="button" class="recommend-right" onclick="museum_page++; showMuseums(rec_museums);"><i class="fa fa-caret-right"></i></button>';
+}
+
+function showHotels(items) {
+    rec_hotels = items;
+    var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    if (items.length < nritems) nritems = items.length;
+
+    if (items.length > nritems) document.getElementById("recommend-hotels").innerHTML = '<button type="button" class="recommend-left" onclick="hotel_page--; showHotels(rec_hotels);"><i class="fa fa-caret-left"></i></button>';
+
+    for (var i = 0; i < nritems; i++) {
+        hotel = items[Math.abs((hotel_offset + i+hotel_page*nritems)%items.length)];
+        document.getElementById("recommend-hotels").innerHTML +=
+            '<div class="recommend-square" style="background-color: ' + colors[hotel.color] + '">' + hotel.name + '</div>';
+    };
+
+    if (items.length > nritems) document.getElementById("recommend-hotels").innerHTML += '<button type="button" class="recommend-right" onclick="hotel_page++; showHotels(rec_hotels);"><i class="fa fa-caret-right"></i></button>';
+}
+
+function showClubs(items) {
+    rec_clubs = items;
+    var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    if (items.length < nritems) nritems = items.length;
+
+    if (items.length > nritems) document.getElementById("recommend-clubs").innerHTML = '<button type="button" class="recommend-left" onclick="club_page--; showClubs(rec_clubs);"><i class="fa fa-caret-left"></i></button>';
+
+    for (var i = 0; i < nritems; i++) {
+        club = items[Math.abs((club_offset + i+club_page*nritems)%items.length)];
+        document.getElementById("recommend-clubs").innerHTML +=
+            '<div class="recommend-square" style="background-color: ' + colors[club.color] + '">' + club.name + '</div>';
+    };
+
+    if (items.length > nritems) document.getElementById("recommend-clubs").innerHTML += '<button type="button" class="recommend-right" onclick="club_page++; showClubs(rec_clubs);"><i class="fa fa-caret-right"></i></button>';
+}
 
 window.addEventListener('resize', function(){
-    setupGeolocation();
+    var widthString = window.getComputedStyle(document.getElementById("recommend-hotels")).width.toString();
+    nritems = Math.floor((widthString.substring(0, widthString.length - 2) - 90) / 90);
+    restaurant_offset += nritems * restaurant_page;
+    museum_offset += nritems * museum_page;
+    club_offset += nritems * club_page;
+    hotel_offset += nritems * hotel_page;
+
+    restaurant_page = 0;
+    museum_page = 0;
+    club_page = 0;
+    hotel_page = 0;
+
+    showRestaurants(rec_restaurants);
+    showClubs(rec_clubs);
+    showHotels(rec_hotels);
+    showMuseums(rec_museums);
 }, true);
