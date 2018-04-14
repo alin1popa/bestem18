@@ -49,6 +49,28 @@ function initAutocomplete() {
     });
     infoWindow = new google.maps.InfoWindow;
 
+    //keep a reference to the original setPosition-function
+    var fx = google.maps.InfoWindow.prototype.setPosition;
+
+//override the built-in setPosition-method
+    google.maps.InfoWindow.prototype.setPosition = function () {
+
+        //logAsInternal isn't documented, but as it seems
+        //it's only defined for InfoWindows opened on POI's
+        if (this.logAsInternal) {
+            google.maps.event.addListenerOnce(this, 'map_changed',function () {
+                var map = this.getMap();
+                //the infoWindow will be opened, usually after a click on a POI
+                if (map) {
+                    //trigger the click
+                    google.maps.event.trigger(map, 'click', {latLng: this.getPosition()});
+                }
+            });
+        }
+        //call the original setPosition-method
+        //fx.apply(this, arguments);
+    };
+
     // Listen for click on map
     google.maps.event.addListener(map, 'click', function(event){
         // Add marker
@@ -119,12 +141,17 @@ function initAutocomplete() {
             };
 
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+            var mark = new google.maps.Marker({
                 map: map,
                 icon: icon,
                 title: place.name,
                 position: place.geometry.location
-            }));
+            });
+            google.maps.event.addListener(mark, 'click', function(event){
+                // Add marker
+                addMarker({coords:event.latLng});
+            });
+            markers.push(mark);
 
             if (place.geometry.viewport) {
                 // Only geocodes have viewport.

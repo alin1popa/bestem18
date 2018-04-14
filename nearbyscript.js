@@ -19,7 +19,7 @@ function restaurantCallback(restData, callback){
         lat = data[i].geometry.location.lat;
         lng = data[i].geometry.location.lng;
         place_id = data[i].place_id;
-        rating = data[i].rating;
+        rating = data[i].rating || 0;
         restaurantsInfo.push({name, lat, lng, place_id, rating, formatted_address})
     }
     callback(restaurantsInfo);
@@ -66,7 +66,7 @@ function museumCallback(ratingSorted, restData, callback){
             lat = data[i].geometry.location.lat;
             lng = data[i].geometry.location.lng;
             place_id = data[i].place_id;
-            rating = data[i].rating;
+            rating = data[i].rating || 0;
 
             museumInfo.push({name, lat, lng, place_id, rating, formatted_address})
         }
@@ -111,7 +111,7 @@ function lodgingCallback(ratingSorted, restData, callback){
         lat = data[i].geometry.location.lat;
         lng = data[i].geometry.location.lng;
         place_id = data[i].place_id;
-        rating = data[i].rating;
+        rating = data[i].rating || 0;
 
         lodgingInfo.push({name, lat, lng, place_id, rating, formatted_address})
     }
@@ -163,7 +163,7 @@ function clubsCallback(ratingSorted, clubsData, callback){
             lat = data[i].geometry.location.lat;
             lng = data[i].geometry.location.lng;
             place_id = data[i].place_id;
-            rating = data[i].rating;
+            rating = data[i].rating || 0;
 
             clubsInfo.push({name, lat, lng, place_id, rating, formatted_address})
         }
