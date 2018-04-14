@@ -1,5 +1,7 @@
 package api;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import services.CustomException;
 import services.MongoDB;
 import services.MySQL;
@@ -56,7 +58,6 @@ public class Users {
             return Response.status(e.getCode(), e.getMessage()).build();
         }
 
-
     }
 
     //Get friends of a user
@@ -65,9 +66,19 @@ public class Users {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFriends(@QueryParam("username") String username) {
 
-        return Response.ok().build();
+        try {
+            List<String> friends = MySQL.getInstance().getFriends(username);
+            String json = new JSONObject().put("friends", friends).toString();
+            return Response.ok(json).build();
+        } catch (CustomException e) {
+            return Response.status(e.getCode(), e.getMessage()).build();
+        } catch (JSONException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
 
     }
+
+    // Trips
 
     @Path("/trips")
     @GET

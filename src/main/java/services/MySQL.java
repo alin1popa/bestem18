@@ -6,6 +6,8 @@ import org.glassfish.jersey.internal.inject.Custom;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class MySQL {
@@ -66,8 +68,13 @@ public class MySQL {
 
         String pass_hash;
 
-        if (username == null || password == null || !username.matches("[A-Za-z0-9_]+")) {
-            CustomException e = new CustomException("Bad request", 400);
+        if (username == null || !username.matches("[A-Za-z0-9_]+")) {
+            CustomException e = new CustomException("Invalid username", 400);
+            throw e;
+        }
+
+        if (password == null) {
+            CustomException e = new CustomException("Invalid password", 400);
             throw e;
         }
 
@@ -90,7 +97,7 @@ public class MySQL {
             }
 
             if (!resultSet.getString("password").equals(pass_hash)) {
-                CustomException e = new CustomException("Bad request", 400);
+                CustomException e = new CustomException("Passwords dont match", 400);
                 throw e;
             }
 
@@ -163,8 +170,13 @@ public class MySQL {
 
     public void addFriendShip(String username1, String username2) {
 
-        if (!userExist(username1) || !userExist(username2) ||
-                !username1.matches("[A-Za-z0-9_]+") || !username2.matches("[A-Za-z0-9_]+")) {
+        if ( username1 == null || username2 == null || !username1.matches("[A-Za-z0-9_]+") ||
+                !username2.matches("[A-Za-z0-9_]+")) {
+            CustomException e = new CustomException("Username invalid", 400);
+            throw e;
+
+        }
+        if (!userExist(username1) || !userExist(username2)) {
             CustomException e = new CustomException("User not found", 400);
             throw e;
         }
@@ -198,6 +210,39 @@ public class MySQL {
             }
 
             return false;
+
+        } catch (SQLException e) {
+            CustomException ce = new CustomException("Database exception", 500);
+            throw ce;
+        }
+
+    }
+
+    public List<String> getFriends(String username) {
+
+        if (username == null || !username.matches("[A-Za-z0-9_]+")) {
+            CustomException e = new CustomException("Invalid username", 400);
+            throw e;
+        }
+
+        if (!userExist(username) ) {
+            CustomException e = new CustomException("User not found", 400);
+            throw e;
+        }
+
+        String sql = "SELECT * from friendships where user1 = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+
+            List<String> friends = new ArrayList<>();
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                friends.add(resultSet.getString("user2"));
+            }
+
+            return friends;
 
         } catch (SQLException e) {
             CustomException ce = new CustomException("Database exception", 500);

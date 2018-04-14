@@ -59,5 +59,6 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.5.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.1" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.39" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20090211" level="project" />
   </component>
 </module>
