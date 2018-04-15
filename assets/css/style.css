@@ -272,3 +272,8 @@ only screen and (                min-resolution: 2dppx) {
 	width: 80%;
 	display: inline-block;
 }
+
+#getuserinfo, #getfriendslist, #getTripsList {
+	position: relative;
+	left: 75px;
+}

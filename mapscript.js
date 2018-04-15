@@ -1,7 +1,7 @@
 
 
 var map, infoWindow;
-var pins = localStorage['pins'] || [];
+var pins = localStorage['pins'] ? JSON.parse(localStorage['pins']) : [];
 var geocoder;
 var placeservice;
 

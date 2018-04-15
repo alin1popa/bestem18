@@ -67,8 +67,8 @@ function placeInfoCallback(placeData, callback){
             //console.log(data[i]);
             name = data[i].name;
             formatted_address = data[i].formatted_address;
-            latCoord = data[i].geometry.location.lat;
-            longCoord = data[i].geometry.location.lng;
+            lat = data[i].geometry.location.lat;
+            lng = data[i].geometry.location.lng;
             place_id = data[i].place_id;
             rating = data[i].rating;
 
@@ -78,7 +78,7 @@ function placeInfoCallback(placeData, callback){
             } else {
                 openedNow = data[i].opening_hours.open_now;
             }
-            placeInfo.push({name, latCoord, longCoord, place_id, rating, formatted_address, openedNow})
+            placeInfo.push({name, lat, lng, place_id, rating, formatted_address, openedNow})
         }
     }
 
