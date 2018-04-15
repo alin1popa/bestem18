@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>User Profile with Content Tabs - Design Shack Demo</title>
+  <meta name="author" content="Jake Rocheleau">
+  <link rel="shortcut icon" href="http://designshack.net/favicon.ico">
+  <link rel="icon" href="http://designshack.net/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+</head>
+
+
+<!-- username, name - first and last, email, agenda, friends -->
+<body>  
+  <div id="w">
+    <div id="content" class="clearfix">
+      <div id="userphoto"><img src="images/avatar.png" alt="default avatar"></div>
+      <h1 id="fullName"></h1>
+
+      <nav id="profiletabs">
+        <ul class="clearfix">
+          <li><a href="#personalinfo" class="sel">Personal Info</a></li>
+          <li><a href="#activity">Activity</a></li>
+          <li><a href="#friends">Friends</a></li>
+          <li><a href="#trips">Trips</a></li>
+        </ul>
+      </nav>
+      
+      <section id="settings" class="hidden">
+        <p>Edit your user settings:</p>
+        
+        <p class="setting"><span>E-mail Address <img src="images/edit.png" alt="Edit"></span> lolno@gmail.com</p>
+        
+        <p class="setting"><span>Language <img src="images/edit.png" alt="Edit"></span> English(US)</p>
+        
+        <p class="setting"><span>Profile Status <img src="images/edit.png" alt="Edit"></span> Public</p>
+        
+        <p class="setting"><span>Update Frequency <img src="images/edit.png" alt="Edit"></span> Weekly</p>
+        
+        <p class="setting"><span>Connected Accounts <img src="images/edit.png" alt="Edit"></span> None</p>
+      </section>
+
+
+      <section id="personalinfo">
+        <button id = "getTripsList" onclick = "getUserInfo('radu')">Get user info</button> <br> <br>
+        <p id="username"></p>
+        
+        <p id="email"></p>
+        
+        <p id="age"></p>
+
+        <p id="gender"></p>
+      </section>
+
+
+      <section id="trips">
+         <button id = "getTripsList" onclick = "getTrips('radu')">Get updated list</button>
+         <br><br>
+
+        <div id="tripname">  </div>
+    
+      </section>
+      
+      <section id="activity">
+        <p>Most recent activity:</p>
+        
+        <p class="activity">@10:15PM - Updated agenda</p>
+        
+        <p class="activity">@9:50PM - Updated agenda</p>
+        
+        <p class="activity">@8:15PM - Posted a comment</p>
+        
+        <p class="activity">@8:10PM - Added <strong>someuser</strong> as a friend</p>
+        
+        <p class="activity">@7:30PM - Updated agenda</p>
+      </section>
+      
+      <section id="friends">
+        <button onclick = "getFriends('radu')">Get friends list</button>
+        <br><br>
+        <div id="friendslist"> 
+        </div>
+      </section>
+      
+
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+
+
+function getTrips(username){
+   $.getJSON('http://10.81.118.7:8888/trips?username=' + username,  
+  tripsCallback);
+}
+
+function tripsCallback(tripsInfo){
+   //console.log(tripsInfo)
+   var nrOfTrips = tripsInfo.length;
+   var journeyDetails = [];
+   var tripname, tripDet, formatted_address, lat, lng, name, rating;
+   for (var  i = 0; i < nrOfTrips; i++) {
+      var tripname = tripsInfo[i].tripname;
+
+      var trips = [];
+      for (var j = 0; j < tripsInfo[i].trip.length; j++) {
+        name = tripsInfo[i].trip[j].name;
+        lat = tripsInfo[i].trip[j].lat;
+        lng = tripsInfo[i].trip[j].lng;
+        rating = tripsInfo[i].trip[j].rating;
+        formatted_address = tripsInfo[i].trip[j].formatted_address;
+
+        trips.push({name, lat, lng, rating, formatted_address})
+      }
+      journeyDetails.push({tripname, trips})
+   }
+   document.getElementById('tripname').innerHTML = "";
+
+   for (var i=0; i < nrOfTrips; i++) {
+      document.getElementById('tripname').innerHTML += '\
+        <div><font size="4">'+journeyDetails[i].tripname + '</font><p style="padding-left:2em">';
+      var tripscontent = "";
+      for (var j=0; j<journeyDetails[i].trips.length; j++) {
+         tripscontent += '<p style="padding-left:3em; font-weight: bold"> ' + journeyDetails[i].trips[j].name +'</p>';
+         tripscontent += '<p style="padding-left:4em">Address:' + journeyDetails[i].trips[j].formatted_address +'</p>';
+         tripscontent += '<p style="padding-left:4em">Rating: ' + journeyDetails[i].trips[j].rating +'</p>';
+      }
+
+      document.getElementById('tripname').innerHTML += tripscontent;
+       document.getElementById('tripname').innerHTML +='</p></div>\
+       ';
+      
+   } 
+}
+
+function getFriends(username){
+   $.getJSON('http://10.81.118.7:8888/friends?username=' + username,  
+  friendsCallback);
+}
+
+function friendsCallback(friendsData){
+  var nrOfFriends = friendsData.length;
+  var friends = [];
+  for (var i = 0; i < nrOfFriends; i++){
+    friends.push(friendsData[i])
+  }
+  
+  document.getElementById('friendslist').innerHTML = "";
+  document.getElementById('friendslist').innerHTML += '<ul id="asd" class="clearfix">'
+  for (var i = 0; i < nrOfFriends; i++){
+     document.getElementById('friendslist').innerHTML += '<li><a href="#"><img src="images/avatar.png" width="22" height="22">';
+     document.getElementById('friendslist').innerHTML += friends[i];
+     document.getElementById('friendslist').innerHTML += '</a></li>';
+  }
+  document.getElementById('friendslist').innerHTML += '</ul>'
+}
+
+
+
+
+
+
+function getUserInfo(username){
+   $.getJSON('http://10.81.118.7:8888/user?username=' + username,  
+  userInfoCallback);
+}
+
+function userInfoCallback(userInfo){
+   //console.log(tripsInfo)
+   var jsonAnswer = userInfo;
+   var name, surname, email_addrs, age, gender, username;
+   
+   name = userInfo.last_name;
+   username = userInfo.username;
+   surname = userInfo.first_name;
+   email_addrs = userInfo.email;
+   age = userInfo.age;
+   gender = userInfo.gender;
+
+   document.getElementById('fullName').innerHTML = surname + " " + name;
+
+    document.getElementById('username').innerHTML = "Username: " + username;
+    document.getElementById('email').innerHTML = "Email: " + email_addrs;
+    document.getElementById('age').innerHTML = "Email:" + age;
+    document.getElementById('gender').innerHTML = "Gender" + gender;
+    
+    
+}
+
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
