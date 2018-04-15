@@ -21,8 +21,6 @@ public class MongoDB {
     private MongoClient mongoClient;
     MongoDatabase dataBase;
 
-
-
     private MongoDB() {
 
         mongoClient = new MongoClient();
@@ -37,7 +35,6 @@ public class MongoDB {
         }
 
         return connection;
-
     }
 
     public void getCollection() {
@@ -85,6 +82,17 @@ public class MongoDB {
         dbCollection.insertOne(Document.parse(json));
     }
 
+    public void deleteTrip(String username, String tripname) {
+
+
+        MongoCollection<Document> dbCollection = dataBase.getCollection("trips");
+
+        BasicDBObject query = new BasicDBObject();
+        query.append("username", username);
+        query.append("tripname", tripname);
+
+        dbCollection.deleteOne(query);
+    }
 
 //    public void addCityForTrip(String username, TripLocation city) {
 //
@@ -96,4 +104,5 @@ public class MongoDB {
 //        FindIterable<Document> cursor = collection.find(eq("username" ,username ));
 //
 //    }
+
 }

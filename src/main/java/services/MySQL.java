@@ -92,7 +92,7 @@ public class MySQL {
 
             ResultSet resultSet = statement.executeQuery();
             if (!resultSet.next()) {
-                CustomException e = new CustomException("Bad request", 400);
+                CustomException e = new CustomException("User not found", 400);
                 throw e;
             }
 
@@ -130,7 +130,7 @@ public class MySQL {
             throw ce;
         }
 
-        String sql = "INSERT into users(username, password, email, last_name, first_name) values(?,?,?,?,?)";
+        String sql = "INSERT into users(username, password, email, last_name, first_name, age, gender) values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user.getUsername());
@@ -138,10 +138,13 @@ public class MySQL {
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getLast_name());
             statement.setString(5, user.getFirst_name());
+            statement.setInt(6, user.getAge());
+            statement.setString(7, user.getGender());
 
             statement.executeUpdate();
 
         } catch (SQLException e) {
+            e.printStackTrace();
             CustomException ce = new CustomException("Database exception", 500);
             throw ce;
         }
@@ -248,6 +251,47 @@ public class MySQL {
             CustomException ce = new CustomException("Database exception", 500);
             throw ce;
         }
+
+    }
+
+    public User getUserInfo(String username) {
+
+        if (username == null || !username.matches("[A-Za-z0-9_]+")) {
+            CustomException e = new CustomException("Invalid username", 400);
+            throw e;
+        }
+
+        if (!userExist(username) ) {
+            CustomException e = new CustomException("User not found", 400);
+            throw e;
+        }
+
+
+        String sql = "SELECT * from users where username = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+
+            User user = new User();
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                user.setUsername(resultSet.getString("username"));
+                user.setEmail(resultSet.getString("email"));
+                user.setLast_name(resultSet.getString("last_name"));
+                user.setFirst_name(resultSet.getString("first_name"));
+                user.setGender(resultSet.getString("gender"));
+                user.setAge(resultSet.getInt("age"));
+            }
+
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            CustomException ce = new CustomException("Database exception", 500);
+            throw ce;
+        }
+
 
     }
 }

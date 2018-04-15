@@ -11,7 +11,7 @@ class App{
     final static Logger log = Logger.getLogger(App.class);
 
     public static void main(String[] args) throws IOException {
-        URI baseUri = UriBuilder.fromUri("http://localhost/").port(8888).build();
+        URI baseUri = UriBuilder.fromUri("http://10.81.118.7/").port(8888).build();
         ResourceConfig resourceConfig = new ResourceConfig(api.Test.class,
                 api.Users.class);
         HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, resourceConfig);

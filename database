@@ -5,7 +5,102 @@ create table users (
 	first_name varchar(50) not null,
 	last_name varchar(50) not null,
 	email varchar(50) unique not null,
+	age int(4) not null,
+	gender varchar(10) not null);
 
 
 create table friendships ( id INT(8) UNSIGNED AUTO_INCREMENT PRIMARY KEY, user1 varchar(30) not null, user2 varchar(30) not null);
 
+
+{
+	"username": "radu",
+	"password": "radu",
+	"email" : "asd@asd.com",
+	"last_name": "Codescu",
+	"first_name": "Radu",
+	"age": 22,
+	"gender": "male"
+}
+
+{
+	"username": "alin",
+	"password": "alin",
+	"email" : "alin@gmail.com",
+	"last_name": "Alin",
+	"first_name": "Alin",
+	"age": 22,
+	"gender": "male"
+}
+
+{
+	"username": "iulia123",
+	"password": "iulia",
+	"email" : "iulia@gmail.com",
+	"last_name": "Oprea",
+	"first_name": "Iulia",
+	"age": 21,
+	"gender": "female"
+}
+
+Trips
+{
+    "username": "radu",
+    "tripname": "Vacanta 2018",
+    
+    "trip" : [
+        
+        {
+            "name": "Timisoara",
+            "lat": 35.51,
+            "lng": 61.12,
+            "rating": 10,
+            "place_id": 12315112,
+            "formatted_address": "Timisoara"
+        },
+        {
+            "name": "Muzeul satului",
+            "lat": 61.61,
+            "lng": 23.42,
+            "rating": 8,
+            "place_id": 123,
+            "formatted_address": "Bucuresti Kiseleff"
+        }
+        
+        ]
+    
+}
+
+{
+    "username": "radu",
+    "tripname": "Romania 2018",
+    
+    "trip" : [
+        
+        {
+            "name": "Ploiesti",
+            "lat": 123121.512,
+            "lng": 1231512.121,
+            "rating": 6,
+            "place_id": 12315112,
+            "formatted_address": "asdasdasd"
+        },
+        {
+            "name": "Bucharest",
+            "lat": 5215.21,
+            "lng": 1231512.121,
+            "rating": 6,
+            "place_id": 12315112,
+            "formatted_address": "asdasdasd"
+        },
+        {
+            "name": "Buzau",
+            "lat": 12.512,
+            "lng": 1231.121,
+            "rating": 6,
+            "place_id": 12315112,
+            "formatted_address": "asdasdasd"
+        }
+        
+        ]
+    
+}

@@ -8,6 +8,8 @@ public class User {
     private String first_name;
     private String last_name;
     private String email;
+    private Integer age;
+    private String gender;
    // Date birth_date;
 
     public Integer getId() {
@@ -56,4 +58,19 @@ public class User {
         this.email = email;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }
