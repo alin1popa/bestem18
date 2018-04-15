@@ -26,7 +26,7 @@ function showDelete(place_id) {
 }
 
 function showInfo(place_id) {
-    
+
 }
 
 function showMore(place_id) {
