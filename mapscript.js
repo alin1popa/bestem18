@@ -1,7 +1,9 @@
 
 
 var map, infoWindow;
-var pins = [];
+var pins = localStorage['pins'] || [];
+var geocoder;
+var placeservice;
 
 var mapStyle4 = [{"featureType":"water","stylers":[{"color":"#19a0d8"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"},{"weight":6}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#e85113"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efe9e4"},{"lightness":-40}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#efe9e4"},{"lightness":-20}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"lightness":100}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"lightness":-100}]},{"featureType":"road.highway","elementType":"labels.icon"},{"featureType":"landscape","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"landscape","stylers":[{"lightness":20},{"color":"#efe9e4"}]},{"featureType":"landscape.man_made","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"lightness":100}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"lightness":-100}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"hue":"#11ff00"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"lightness":100}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"hue":"#4cff00"},{"saturation":58}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#f0e4d3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#efe9e4"},{"lightness":-25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#efe9e4"},{"lightness":-10}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"simplified"}]}];
 // Add Marker Function
@@ -29,11 +31,51 @@ function addMarker(props){
         });
     }
 
-    pins.push({
-        lat: props.coords.lat(),
-        lng: props.coords.lng()
-    });
-    localStorage['pins'] = JSON.stringify(pins);
+    var lat = props.coords.lat();
+    var lng = props.coords.lng();
+
+    var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+    var placeid;
+
+    if (!props.name) {
+        geocoder.geocode({'location': latlng}, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                console.log(results);
+                if (results[0]) {
+                    // console.log(results[1].place_id);
+                    placeid = results[0].place_id;
+                } else {
+                    window.alert('No results found');
+                }
+            } else {
+                window.alert('Geocoder failed due to: ' + status);
+            }
+
+            placeservice.getDetails({
+                placeId: placeid
+            }, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    name = place.name;
+                    pins.push({
+                        lat: lat,
+                        lng: lng,
+                        name: name,
+                        place_id: placeid
+                    });
+                    localStorage['pins'] = JSON.stringify(pins);
+                }
+            });
+        });
+    }
+    else {
+        pins.push({
+            lat: lat,
+            lng: lng,
+            name: props.name,
+            place_id: props.id
+        });
+        localStorage['pins'] = JSON.stringify(pins);
+    }
 }
 
 
@@ -47,6 +89,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 
 function initAutocomplete() {
+    geocoder = new google.maps.Geocoder;
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -33.8688, lng: 151.2195},
         zoom: 13,
@@ -54,6 +98,7 @@ function initAutocomplete() {
         styles: mapStyle4
     });
     infoWindow = new google.maps.InfoWindow;
+    placeservice = new google.maps.places.PlacesService(map);
 
     //keep a reference to the original setPosition-function
     var fx = google.maps.InfoWindow.prototype.setPosition;
@@ -157,7 +202,7 @@ function initAutocomplete() {
             });
             google.maps.event.addListener(mark, 'click', function(event){
                 // Add marker
-                addMarker({coords: place.geometry.location});
+                addMarker({coords: place.geometry.location, name: place.name, id: place.place_id});
             });
             markers.push(mark);
 
@@ -208,22 +253,22 @@ club_offset = 0;
 
 function clickedRestaurant(id) {
     var place = rec_restaurants.find((r) => r.place_id == id);
-    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng), name: place.name, id: id});
 }
 
 function clickedHotel(id) {
     var place = rec_hotels.find((r) => r.place_id == id);
-    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng), name: place.name, id: id});
 }
 
 function clickedMuseum(id) {
     var place = rec_museums.find((r) => r.place_id == id);
-    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng), name: place.name, id: id});
 }
 
 function clickedClub(id) {
     var place = rec_clubs.find((r) => r.place_id == id);
-    addMarker({coords:new google.maps.LatLng(place.lat, place.lng)});
+    addMarker({coords:new google.maps.LatLng(place.lat, place.lng), name: place.name, id: id});
 }
 
 function setupGeolocation(position) {

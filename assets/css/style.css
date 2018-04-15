@@ -171,3 +171,53 @@ only screen and (                min-resolution: 2dppx) {
     }
 	
 }
+
+/* ------------------------------ */
+
+.agenda {
+	padding: 50px;
+	padding-top: 0;
+	padding-bottom: 0;
+	width: 50%;
+	display: inline-block;
+	float: left;
+
+	height: 100%;
+	overflow-y: auto;
+}
+
+.agenda-row {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.agenda-name {
+	font-size: 22px;
+	font-weight: 400;
+	display: block;
+	text-align: left;
+	position: relative;
+	left: 20px;
+	pointer-events: none;
+}
+
+.agenda-icons {
+	display: inline-block;
+	float: left;
+}
+
+.agenda-icon {
+	font-size: 22px;
+	margin-left: 20px;
+}
+
+.infospace {
+	width: 50%;
+	height: 100%;
+	display: inline-block;
+}
+
+.agendapage {
+	height: calc(100% - 150px);
+	width: 100%;
+}
