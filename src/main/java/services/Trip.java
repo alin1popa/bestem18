@@ -5,7 +5,16 @@ import java.util.List;
 public class Trip {
 
     private String username;
+    private String tripname;
     private List<TripLocation> trip;
+
+    public String getTripname() {
+        return tripname;
+    }
+
+    public void setTripname(String tripname) {
+        this.tripname = tripname;
+    }
 
     public String getUsername() {
         return username;

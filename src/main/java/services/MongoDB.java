@@ -84,4 +84,16 @@ public class MongoDB {
         MongoCollection<Document> dbCollection = dataBase.getCollection("trips");
         dbCollection.insertOne(Document.parse(json));
     }
+
+
+//    public void addCityForTrip(String username, TripLocation city) {
+//
+//        Gson gson = new Gson();
+//        String json = gson.toJson(city);
+//
+//        MongoCollection<Document> collection = dataBase.getCollection("trips");
+//
+//        FindIterable<Document> cursor = collection.find(eq("username" ,username ));
+//
+//    }
 }
