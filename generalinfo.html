@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TripVenture</title>
+
+        <!-- CSS -->        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+		<link rel="stylesheet" href="mapstyle.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
+		<script>
+            function getConversionJSON(from, to, amount){
+                $.getJSON('https://free.currencyconverterapi.com/api/v5/convert?q=' + from + '_' + to, (result) => currencyCallback(from, to, amount, result));
+
+            }
+
+
+            function currencyCallback(from, to, amount, currencyData){
+                var key = from + "_" + to;
+                result = currencyData.results[key].val * amount;
+                console.log(result);
+                alert(result);
+            }
+
+            function convertt() {
+                getConversionJSON(document.getElementById('from').value, document.getElementById('to').value, parseInt(document.getElementById('amount').value));
+			}
+
+		</script>
+
+		<style>
+			.results tr[visible='false'],
+			.no-result{
+				display:none;
+			}
+
+			.results tr[visible='true']{
+				display:table-row;
+			}
+
+			.counter{
+				padding:8px;
+				color:#ccc;
+			}
+
+		</style>
+    </head>
+
+    <body>
+		
+		<!-- Top menu -->
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">TripVenture</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="#">Map</a></li>
+						<li><a href="#">My trips</a></li>
+						<li><a href="#">Profile</a></li>
+						<li><a href="#">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<h1>General information</h1>
+		<h3>Currency converter</h3>
+			<input id="from" type="text" placeholder="from"></input>
+			<input id="to" type="text" placeholder="to"></input>
+			<input id="amount" type="text" placeholder="amount"></input>
+			<button id = "getIt" onclick = "convertt()">Convert</button>
+			<div id="moneyresult"></div>
+		<h3>Emergency numbers</h3>
+		<div class="form-group pull-right">
+			<input type="text" class="search form-control" placeholder="What you looking for?">
+		</div>
+		<span class="counter pull-right"></span>
+		<table class="table table-hover table-bordered results">
+			<thead>
+			<tr >
+				<th>No</th>
+				<th class="col-md-5 col-xs-4">Country name</th>
+				<th class="col-md-4 col-xs-2">Police</th>
+				<th class="col-md-3 col-xs-2">Ambulance</th>
+				<th class="col-md-3 col-xs-2">Fire</th>
+			</tr>
+			<tr class="warning no-result">
+				<td colspan="4"><i class="fa fa-warning"></i> No result</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="call_tr">
+				<th class="call_th" scope="row">1</th>
+				<td class="call_country">Afghanistan</td>
+				<td class="call_nr">119</td>
+				<td class="call_nr">102 </td>
+				<td class="call_nr">119</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">2</th>
+				<td class="call_country">Albania</td>
+				<td class="call_nr">129</td>
+				<td class="call_nr">127</td>
+				<td class="call_nr">128</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">3</th>
+				<td class="call_country">Algeria</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">-</td>
+				<td class="call_nr">14</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">4</th>
+				<td class="call_country">American Samoa</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">5</th>
+				<td class="call_country">Andorra</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">6</th>
+				<td class="call_country">Angola</td>
+				<td class="call_nr">113</td>
+				<td class="call_nr">115</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">7</th>
+				<td class="call_country">Antigua and Barbuda</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">8</th>
+				<td class="call_country">Argentina</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">107</td>
+				<td class="call_nr">100</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">9</th>
+				<td class="call_country">Armenia</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">10</th>
+				<td class="call_country">Aruba</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">11</th>
+				<td class="call_country">Australia</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">12</th>
+				<td class="call_country">Austria</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">13</th>
+				<td class="call_country">Azerbaijan</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">14</th>
+				<td class="call_country">Bahamas</td>
+				<td class="call_nr">911919</td>
+				<td class="call_nr">911919</td>
+				<td class="call_nr">911919</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">15</th>
+				<td class="call_country">Bahrain</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">16</th>
+				<td class="call_country">Bangladesh</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">17</th>
+				<td class="call_country">Barbados</td>
+				<td class="call_nr">211</td>
+				<td class="call_nr">511</td>
+				<td class="call_nr">311</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">18</th>
+				<td class="call_country">Belarus</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">19</th>
+				<td class="call_country">Belgium</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">20</th>
+				<td class="call_country">Belize</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">21</th>
+				<td class="call_country">Bermuda</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">22</th>
+				<td class="call_country">Bhutan</td>
+				<td class="call_nr">113</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">110</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">23</th>
+				<td class="call_country">Bolivia</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">118</td>
+				<td class="call_nr">119</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">24</th>
+				<td class="call_country">Bosnia and Herzegovina</td>
+				<td class="call_nr">122</td>
+				<td class="call_nr">124</td>
+				<td class="call_nr">123</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">25</th>
+				<td class="call_country">Botswana</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">997</td>
+				<td class="call_nr">998</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">26</th>
+				<td class="call_country">Brazil</td>
+				<td class="call_nr">190</td>
+				<td class="call_nr">192</td>
+				<td class="call_nr">193 </td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">27</th>
+				<td class="call_country">British Virgin Islands</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">28</th>
+				<td class="call_country">Brunei</td>
+				<td class="call_nr">993</td>
+				<td class="call_nr">991</td>
+				<td class="call_nr">955</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">29</th>
+				<td class="call_country">Bulgaria</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">30</th>
+				<td class="call_country">Burma</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">31</th>
+				<td class="call_country">Cambodia</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">119</td>
+				<td class="call_nr">118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">32</th>
+				<td class="call_country">Canada</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">33</th>
+				<td class="call_country">Cape Verde</td>
+				<td class="call_nr">132</td>
+				<td class="call_nr">130</td>
+				<td class="call_nr">131</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">34</th>
+				<td class="call_country">Cayman Islands</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">35</th>
+				<td class="call_country">Chile</td>
+				<td class="call_nr">133</td>
+				<td class="call_nr">131</td>
+				<td class="call_nr">132</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">36</th>
+				<td class="call_country">China</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">120</td>
+				<td class="call_nr">119</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">37</th>
+				<td class="call_country">Christmas Island</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">38</th>
+				<td class="call_country">Colombia</td>
+				<td class="call_nr">123</td>
+				<td class="call_nr">123</td>
+				<td class="call_nr">123</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">39</th>
+				<td class="call_country">Congo</td>
+				<td class="call_nr">24206665-4804</td>
+				<td class="call_nr">24206665-4804</td>
+				<td class="call_nr">24206665-4804</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">40</th>
+				<td class="call_country">Costa Rica</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">41</th>
+				<td class="call_country">Croatia</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">42</th>
+				<td class="call_country">Cuba</td>
+				<td class="call_nr">106</td>
+				<td class="call_nr">-</td>
+				<td class="call_nr">105</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">43</th>
+				<td class="call_country">Cyprus</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">44</th>
+				<td class="call_country">Czech Republic</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">45</th>
+				<td class="call_country">Côte d'Ivoire</td>
+				<td class="call_nr">180111</td>
+				<td class="call_nr">111</td>
+				<td class="call_nr">110111170</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">46</th>
+				<td class="call_country">Denmark</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">47</th>
+				<td class="call_country">Djibouti</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">351351</td>
+				<td class="call_nr">18</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">48</th>
+				<td class="call_country">Dominica</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">49</th>
+				<td class="call_country">Dominican Republic</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">50</th>
+				<td class="call_country">Ecuador</td>
+				<td class="call_nr">101</td>
+				<td class="call_nr">101</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">51</th>
+				<td class="call_country">Egypt</td>
+				<td class="call_nr">122</td>
+				<td class="call_nr">122180</td>
+				<td class="call_nr">122123</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">52</th>
+				<td class="call_country">El Salvador</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">53</th>
+				<td class="call_country">Estonia</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">54</th>
+				<td class="call_country">Ethiopia</td>
+				<td class="call_nr">99191</td>
+				<td class="call_nr">99192</td>
+				<td class="call_nr">99193</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">55</th>
+				<td class="call_country">Falkland Islands</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">56</th>
+				<td class="call_country">Faroe Islands</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">57</th>
+				<td class="call_country">Fiji</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">9170</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">58</th>
+				<td class="call_country">Finland</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">59</th>
+				<td class="call_country">France</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">60</th>
+				<td class="call_country">French Guiana</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">61</th>
+				<td class="call_country">French Polynesia</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">18</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">62</th>
+				<td class="call_country">Georgia</td>
+				<td class="call_nr">22</td>
+				<td class="call_nr">22</td>
+				<td class="call_nr">22</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">63</th>
+				<td class="call_country">Germany</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">64</th>
+				<td class="call_country">Gibraltar</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">190</td>
+				<td class="call_nr">190</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">65</th>
+				<td class="call_country">Greece</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">66</th>
+				<td class="call_country">Guam</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">67</th>
+				<td class="call_country">Guatemala</td>
+				<td class="call_nr">122123120</td>
+				<td class="call_nr">122123120</td>
+				<td class="call_nr">122123120</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">68</th>
+				<td class="call_country">Guernsey</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">69</th>
+				<td class="call_country">Guyana</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911913</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">70</th>
+				<td class="call_country">Haiti</td>
+				<td class="call_nr">114</td>
+				<td class="call_nr">114</td>
+				<td class="call_nr">114</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">71</th>
+				<td class="call_country">Holy See (Vatican City)</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">72</th>
+				<td class="call_country">Honduras</td>
+				<td class="call_nr">199</td>
+				<td class="call_nr">199</td>
+				<td class="call_nr">199</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">73</th>
+				<td class="call_country">Hong Kong</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">-</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">74</th>
+				<td class="call_country">Hungary</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">75</th>
+				<td class="call_country">Iceland</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">76</th>
+				<td class="call_country">India</td>
+				<td class="call_nr">100</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">77</th>
+				<td class="call_country">Indonesia</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">118</td>
+				<td class="call_nr">113</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">78</th>
+				<td class="call_country">Iran</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">115</td>
+				<td class="call_nr">125</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">79</th>
+				<td class="call_country">Iraq</td>
+				<td class="call_nr">122104</td>
+				<td class="call_nr">122</td>
+				<td class="call_nr">122115</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">80</th>
+				<td class="call_country">Ireland</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">81</th>
+				<td class="call_country">Isle of Man</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">82</th>
+				<td class="call_country">Israel</td>
+				<td class="call_nr">100</td>
+				<td class="call_nr">100101</td>
+				<td class="call_nr">100102</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">83</th>
+				<td class="call_country">Italy</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">84</th>
+				<td class="call_country">Jamaica</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">85</th>
+				<td class="call_country">Japan</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">119</td>
+				<td class="call_nr">119</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">86</th>
+				<td class="call_country">Jersey</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">87</th>
+				<td class="call_country">Jordan</td>
+				<td class="call_nr">191</td>
+				<td class="call_nr">191</td>
+				<td class="call_nr">191</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">88</th>
+				<td class="call_country">Kazakhstan</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">103</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">89</th>
+				<td class="call_country">Kenya</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">90</th>
+				<td class="call_country">Kiribati</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">992 </td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">91</th>
+				<td class="call_country">Korea</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112119</td>
+				<td class="call_nr">112119</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">92</th>
+				<td class="call_country">Kuwait</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">93</th>
+				<td class="call_country">Kyrgyzstan</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">94</th>
+				<td class="call_country">Laos</td>
+				<td class="call_nr">191</td>
+				<td class="call_nr">195</td>
+				<td class="call_nr">190</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">95</th>
+				<td class="call_country">Latvia</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">96</th>
+				<td class="call_country">Lebanon</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">97</th>
+				<td class="call_country">Lesotho</td>
+				<td class="call_nr">123124</td>
+				<td class="call_nr">121</td>
+				<td class="call_nr">122</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">98</th>
+				<td class="call_country">Liberia</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">99</th>
+				<td class="call_country">Libya</td>
+				<td class="call_nr">193</td>
+				<td class="call_nr">193</td>
+				<td class="call_nr">193</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">100</th>
+				<td class="call_country">Liechtenstein</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">101</th>
+				<td class="call_country">Lithuania</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">102</th>
+				<td class="call_country">Luxembourg</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">103</th>
+				<td class="call_country">Macau</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">104</th>
+				<td class="call_country">Macedonia [FYROM]</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">105</th>
+				<td class="call_country">Madagascar</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">117118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">106</th>
+				<td class="call_country">Malawi</td>
+				<td class="call_nr">997</td>
+				<td class="call_nr">998</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">107</th>
+				<td class="call_country">Malaysia</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">108</th>
+				<td class="call_country">Maldives</td>
+				<td class="call_nr">119</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">109</th>
+				<td class="call_country">Mali</td>
+				<td class="call_nr">18</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">17</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">110</th>
+				<td class="call_country">Malta</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">111</th>
+				<td class="call_country">Marshall Islands</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">112</th>
+				<td class="call_country">Martinique</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">18</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">113</th>
+				<td class="call_country">Mauritania</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">-</td>
+				<td class="call_nr">118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">114</th>
+				<td class="call_country">Mauritius</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">114</td>
+				<td class="call_nr">115</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">115</th>
+				<td class="call_country">Mexico</td>
+				<td class="call_nr">66</td>
+				<td class="call_nr">66</td>
+				<td class="call_nr">66</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">116</th>
+				<td class="call_country">Micronesia, Federated States of</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">117</th>
+				<td class="call_country">Moldova</td>
+				<td class="call_nr">902</td>
+				<td class="call_nr">903</td>
+				<td class="call_nr">901</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">118</th>
+				<td class="call_country">Monaco</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">119</th>
+				<td class="call_country">Mongolia</td>
+				<td class="call_nr">102</td>
+				<td class="call_nr">103</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">120</th>
+				<td class="call_country">Montenegro</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">121</th>
+				<td class="call_country">Montserrat</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">122</th>
+				<td class="call_country">Morocco</td>
+				<td class="call_nr">190</td>
+				<td class="call_nr">190</td>
+				<td class="call_nr">190</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">123</th>
+				<td class="call_country">Mozambique</td>
+				<td class="call_nr">119</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">198</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">124</th>
+				<td class="call_country">Namibia</td>
+				<td class="call_nr">1011</td>
+				<td class="call_nr">2032276</td>
+				<td class="call_nr">2032270</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">125</th>
+				<td class="call_country">Nepal</td>
+				<td class="call_nr">100</td>
+				<td class="call_nr">100</td>
+				<td class="call_nr">100101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">126</th>
+				<td class="call_country">Netherlands</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">127</th>
+				<td class="call_country">New Caledonia</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">18</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">128</th>
+				<td class="call_country">New Zealand</td>
+				<td class="call_nr">111</td>
+				<td class="call_nr">111</td>
+				<td class="call_nr">111</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">129</th>
+				<td class="call_country">Nicaragua</td>
+				<td class="call_nr">118</td>
+				<td class="call_nr">118</td>
+				<td class="call_nr">118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">130</th>
+				<td class="call_country">Nigeria</td>
+				<td class="call_nr">199</td>
+				<td class="call_nr">199</td>
+				<td class="call_nr">199</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">131</th>
+				<td class="call_country">Niue</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">132</th>
+				<td class="call_country">Norfolk Island</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">133</th>
+				<td class="call_country">Norway</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">134</th>
+				<td class="call_country">Oman</td>
+				<td class="call_nr">9999</td>
+				<td class="call_nr">9999</td>
+				<td class="call_nr">9999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">135</th>
+				<td class="call_country">Pakistan</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">1516</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">136</th>
+				<td class="call_country">Palau</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">137</th>
+				<td class="call_country">Panama</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">138</th>
+				<td class="call_country">Papua New Guinea</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+				<td class="call_nr">0000</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">139</th>
+				<td class="call_country">Paraguay</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">140</th>
+				<td class="call_country">Peru</td>
+				<td class="call_nr">105</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">116</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">141</th>
+				<td class="call_country">Philippines</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">117</td>
+				<td class="call_nr">117</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">142</th>
+				<td class="call_country">Poland</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">143</th>
+				<td class="call_country">Portugal</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">144</th>
+				<td class="call_country">Puerto Rico</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">145</th>
+				<td class="call_country">Qatar</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">146</th>
+				<td class="call_country">Romania</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">147</th>
+				<td class="call_country">Russia</td>
+				<td class="call_nr">2</td>
+				<td class="call_nr">3</td>
+				<td class="call_nr">1</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">148</th>
+				<td class="call_country">Réunion</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">15112</td>
+				<td class="call_nr">18</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">149</th>
+				<td class="call_country">Saint Barthélemy</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">150</th>
+				<td class="call_country">Saint Helena</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">151</th>
+				<td class="call_country">Saint Kitts and Nevis</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">152</th>
+				<td class="call_country">Saint Lucia</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">153</th>
+				<td class="call_country">Saint Martin</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">154</th>
+				<td class="call_country">Saint Pierre and Miquelon</td>
+				<td class="call_nr">17</td>
+				<td class="call_nr">15</td>
+				<td class="call_nr">18</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">155</th>
+				<td class="call_country">Saint Vincent and the Grenadines</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">156</th>
+				<td class="call_country">Samoa</td>
+				<td class="call_nr">995</td>
+				<td class="call_nr">996</td>
+				<td class="call_nr">994</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">157</th>
+				<td class="call_country">San Marino</td>
+				<td class="call_nr">113</td>
+				<td class="call_nr">118</td>
+				<td class="call_nr">115</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">158</th>
+				<td class="call_country">Sao Tome and Principe</td>
+				<td class="call_nr">222222</td>
+				<td class="call_nr">222222</td>
+				<td class="call_nr">222222</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">159</th>
+				<td class="call_country">Saudi Arabia</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">997</td>
+				<td class="call_nr">998</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">160</th>
+				<td class="call_country">Senegal</td>
+				<td class="call_nr">800002020800001700</td>
+				<td class="call_nr">800002020800001700</td>
+				<td class="call_nr">800002020800001700</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">161</th>
+				<td class="call_country">Serbia</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">162</th>
+				<td class="call_country">Seychelles</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">163</th>
+				<td class="call_country">Sierra Leone</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">19</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">164</th>
+				<td class="call_country">Singapore</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">995</td>
+				<td class="call_nr">995</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">165</th>
+				<td class="call_country">Slovakia</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">166</th>
+				<td class="call_country">Slovenia</td>
+				<td class="call_nr">113</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">167</th>
+				<td class="call_country">Solomon Islands</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">168</th>
+				<td class="call_country">South Africa</td>
+				<td class="call_nr">10111</td>
+				<td class="call_nr">10177</td>
+				<td class="call_nr">10177</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">169</th>
+				<td class="call_country">Spain</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">170</th>
+				<td class="call_country">Sri Lanka</td>
+				<td class="call_nr">119118</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">110</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">171</th>
+				<td class="call_country">Svalbard</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">172</th>
+				<td class="call_country">Swaziland</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">173</th>
+				<td class="call_country">Sweden</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">174</th>
+				<td class="call_country">Switzerland</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">175</th>
+				<td class="call_country">Syria</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">113</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">176</th>
+				<td class="call_country">Taiwan</td>
+				<td class="call_nr">110</td>
+				<td class="call_nr">119</td>
+				<td class="call_nr">119</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">177</th>
+				<td class="call_country">Tajikistan</td>
+				<td class="call_nr">2</td>
+				<td class="call_nr">3</td>
+				<td class="call_nr">1</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">178</th>
+				<td class="call_country">Tanzania</td>
+				<td class="call_nr">111</td>
+				<td class="call_nr">111</td>
+				<td class="call_nr">111</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">179</th>
+				<td class="call_country">Thailand</td>
+				<td class="call_nr">191</td>
+				<td class="call_nr">1554</td>
+				<td class="call_nr">199</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">180</th>
+				<td class="call_country">Timor-Leste</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">181</th>
+				<td class="call_country">Togo</td>
+				<td class="call_nr">117171</td>
+				<td class="call_nr">242</td>
+				<td class="call_nr">118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">182</th>
+				<td class="call_country">Tonga</td>
+				<td class="call_nr">117171172</td>
+				<td class="call_nr">242</td>
+				<td class="call_nr">118</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">183</th>
+				<td class="call_country">Trinidad and Tobago</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">990</td>
+				<td class="call_nr">990</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">184</th>
+				<td class="call_country">Tunisia</td>
+				<td class="call_nr">197</td>
+				<td class="call_nr">197</td>
+				<td class="call_nr">197</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">185</th>
+				<td class="call_country">Turkey</td>
+				<td class="call_nr">155</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">155</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">186</th>
+				<td class="call_country">Turkmenistan</td>
+				<td class="call_nr">3</td>
+				<td class="call_nr">3</td>
+				<td class="call_nr">3</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">187</th>
+				<td class="call_country">Turks and Caicos Islands</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+				<td class="call_nr">911999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">188</th>
+				<td class="call_country">Tuvalu</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">189</th>
+				<td class="call_country">Uganda</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">190</th>
+				<td class="call_country">Ukraine</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">191</th>
+				<td class="call_country">United Arab Emirates</td>
+				<td class="call_nr">998999</td>
+				<td class="call_nr">998999</td>
+				<td class="call_nr">998999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">192</th>
+				<td class="call_country">United Kingdom</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">999</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">193</th>
+				<td class="call_country">United States</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">194</th>
+				<td class="call_country">Uruguay</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">195</th>
+				<td class="call_country">Uzbekistan</td>
+				<td class="call_nr">2</td>
+				<td class="call_nr">3</td>
+				<td class="call_nr">1</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">196</th>
+				<td class="call_country">Vanuatu</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+				<td class="call_nr">112</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">197</th>
+				<td class="call_country">Venezuela</td>
+				<td class="call_nr">171</td>
+				<td class="call_nr">171</td>
+				<td class="call_nr">171</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">198</th>
+				<td class="call_country">Vietnam</td>
+				<td class="call_nr">113</td>
+				<td class="call_nr">115</td>
+				<td class="call_nr">114</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">199</th>
+				<td class="call_country">Virgin Islands</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+				<td class="call_nr">911</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">200</th>
+				<td class="call_country">West Bank</td>
+				<td class="call_nr">101</td>
+				<td class="call_nr">101</td>
+				<td class="call_nr">101</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">201</th>
+				<td class="call_country">Yemen</td>
+				<td class="call_nr">199</td>
+				<td class="call_nr">199</td>
+				<td class="call_nr">199</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">202</th>
+				<td class="call_country">Zambia</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">991</td>
+				<td class="call_nr">993</td>
+			</tr>
+
+			<tr class="call_tr">
+				<th class="call_th" scope="row">203</th>
+				<td class="call_country">Zimbabwe</td>
+				<td class="call_nr">999</td>
+				<td class="call_nr">994</td>
+				<td class="call_nr">993</td>
+			</tr>
+			<tbody>
+
+			</tbody>
+		</table>
+
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+		<script type="text/javascript">
+
+            $(document).ready(function() {
+                $(".search").keyup(function () {
+                    var searchTerm = $(".search").val();
+                    var listItem = $('.results tbody').children('tr');
+                    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+                    $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+                        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                    }
+                    });
+
+                    $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+                        $(this).attr('visible','false');
+                    });
+
+                    $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+                        $(this).attr('visible','true');
+                    });
+
+                    var jobCount = $('.results tbody tr[visible="true"]').length;
+                    $('.counter').text(jobCount + ' item');
+
+                    if(jobCount == '0') {$('.no-result').show();}
+                    else {$('.no-result').hide();}
+                });
+            });
+		</script>
+
+    </body>
+
+
+</html>
