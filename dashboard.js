@@ -28,6 +28,64 @@ function weatherCallback(weatherdata, callback){
     callback(forecast);
 }
 
+//the places that dont have opennow specified wont be displayed
+//rankby can be prominence (ranking) or distance (obvious one)
+//locationCoord = {lat, long}
+//if ratingSorted = true, you sort the elems by rating
+//if you wanna checck if they're opened
+//if result is null and you have openedNow = true, print message "No clubs opened at the time. Try back later"
+function getInfoOfPlaceJSON(place, atlocationLat, atlocationLong, callback) {
+    $.getJSON('https://maps.googleapis.com/maps/api/place/textsearch/json?type=' + place + '&location=' + atlocationLat + "," + atlocationLong + '&key=AIzaSyCZpdfSClvPFQEX-Q6O7xknzgVtC13s4GY', (res) => placeInfoCallback(res, callback) );
+}
+
+function compare(a, b) {
+    var fstElem = a.rating;
+    var sndElem = b.rating;
+
+    comp = 0;
+    if (fstElem < sndElem) {
+        comp = 1;
+    } else if (fstElem > sndElem) {
+        comp = -1;
+    }
+
+    return comp;
+}
+
+function placeInfoCallback(placeData, callback){
+    var res = placeData;
+    //console.log(res)
+    var openedStuff = []
+    if (res.status == "ZERO_RESULTS"){
+        return null;
+    } else {
+        data = res.results;
+        // console.log(data.length)
+        placeInfo = [];
+        var name, formatted_address, place_id, rating, location, openedNow;
+        for (var i = 0; i < data.length; i++){
+            //console.log(data[i]);
+            name = data[i].name;
+            formatted_address = data[i].formatted_address;
+            latCoord = data[i].geometry.location.lat;
+            longCoord = data[i].geometry.location.lng;
+            place_id = data[i].place_id;
+            rating = data[i].rating;
+
+            openingSch =  data[i].opening_hours;
+            if (typeof openingSch == 'undefined'){
+                openedNow = 'unknown'
+            } else {
+                openedNow = data[i].opening_hours.open_now;
+            }
+            placeInfo.push({name, latCoord, longCoord, place_id, rating, formatted_address, openedNow})
+        }
+    }
+
+    console.log(placeInfo);
+    callback(placeInfo);
+}
+
 function buildAgenda() {
     document.getElementById("agenda").innerHTML = "";
     localStorage['pins'] = JSON.stringify(pins);
@@ -53,6 +111,7 @@ function showDelete(place_id) {
 
 function showInfo(place_id) {
     pin = pins.find((p) => p.place_id == place_id);
+    document.getElementById("similar").innerHTML = "";
     getWeatherJSON(pin.lat, pin.lng, function(forecast) {
         console.log(forecast);
         document.getElementById("infoweather").innerHTML = "<h4 class='infosectiontitle'>Weather forecast</h4>";
@@ -76,7 +135,72 @@ function showInfo(place_id) {
 }
 
 function showMore(place_id) {
+    pin = pins.find((p) => p.place_id == place_id);
 
+    document.getElementById("infotitle").innerHTML = "<h3>Discover places near " + pin.name+"</h3>";
+    document.getElementById("infoweather").innerHTML = "";
+    document.getElementById("infolocation").innerHTML = "";
+    document.getElementById("similar").innerHTML = `
+        <select id="stype" class="form-control sselect">
+					<option value="Select type" selected disabled>Select type</option>
+					<option value="airport">Airport/option>
+					<option value="amusement_park">Amusement park</option>
+					<option value="art_gallery">Art gallery</option>
+					<option value="atm">ATM</option>
+					<option value="bank">Bank</option>
+					<option value="bar">Bar</option>
+					<option value="bus_station">Bus station</option>
+					<option value="car_wash">Car wash</option>
+					<option value="church">Church</option>
+					<option value="embassy">Embassy</option>
+					<option value="fire_station">Fire station</option>
+					<option value="gas_station">Gas station</option>
+					<option value="gym">Gym</option>
+					<option value="hospital">Hospital</option>
+					<option value="library">Library</option>
+					<option value="locksmith">Locksmith</option>
+					<option value="lodging">Lodging</option>
+					<option value="museum">Museum</option>
+					<option value="night_club">Night club</option>
+					<option value="park">Park</option>
+					<option value="pharmacy">Pharmacy</option>
+					<option value="police">Police</option>
+					<option value="post_office">Post office</option>
+					<option value="restaurant">Restaurant</option>
+					<option value="school">School</option>
+					<option value="shopping_mall">Shoppinng mall</option>
+					<option value="spa">SPA</option>
+					<option value="subway_station">Subway station</option>
+					<option value="supermarket">Supermarker</option>
+					<option value="train_station">Train station</option>
+				</select>
+            <button type="button" class="btn btn-primary" onclick="getPlaces(${pin.lat}, ${pin.lng})">Discover</button>
+            <div id="simcontainer"></div>
+    `;
+}
+
+function getPlaces(lat, lng) {
+    document.getElementById("simcontainer").innerHTML = "";
+    getInfoOfPlaceJSON(document.getElementById('stype').value, lat, lng, function(data) {
+        data.map((item) => {
+            document.getElementById("simcontainer").innerHTML +=
+            `<a href="#" onclick="clickedsmth('${item.place_id}', ${item.lat}, ${item.lng}, '${item.name}')"><div class="recommend-square similarsquare"><span class="recname">
+            ${(item.name.length > 33 ? item.name.substring(0, 33) + '...' : item.name)}
+            </span><span class="recrating">Rating: ${item.rating}/5</span></div></a>`;
+
+    });
+    });
+}
+
+function clickedsmth(place_id, lat, lng, name) {
+    pins.push({
+        lat: lat,
+        lng: lng,
+        name: name,
+        place_id: place_id
+    });
+    localStorage['pins'] = JSON.stringify(pins);
+    buildAgenda();
 }
 
 buildAgenda();

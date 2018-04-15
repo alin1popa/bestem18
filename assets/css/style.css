@@ -248,11 +248,8 @@ only screen and (                min-resolution: 2dppx) {
 	font-weight: bold;
 }
 
-.infoweather, .infolocation {
-	margin-top: 50px;
-}
-
 .infosectiontitle {
+	margin-top: 50px;
 	text-align: left;
 	padding-left: 20px;
 	clear: left;
@@ -261,4 +258,17 @@ only screen and (                min-resolution: 2dppx) {
 .locp {
 	text-align: left;
 	padding-left: 20px;
+}
+
+.similar {
+}
+
+.similarsquare {
+	margin-left: 20px !important;
+	margin-top: 20px !important;
+}
+
+.sselect {
+	width: 80%;
+	display: inline-block;
 }
