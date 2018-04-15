@@ -97,4 +97,15 @@ public class Users {
         return Response.ok().build();
 
     }
+
+//    @Path("/citytotrip")
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response addCityToTrip(@QueryParam("username") String username, TripLocation city) {
+//
+//        MongoDB.getConnection().addCityForTrip(username, city);
+//        return Response.ok().build();
+//
+//    }
 }
