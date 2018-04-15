@@ -215,6 +215,7 @@ only screen and (                min-resolution: 2dppx) {
 	width: 50%;
 	height: 100%;
 	display: inline-block;
+	overflow-y: auto;
 }
 
 .agendapage {
@@ -247,6 +248,17 @@ only screen and (                min-resolution: 2dppx) {
 	font-weight: bold;
 }
 
-.infoweather {
+.infoweather, .infolocation {
 	margin-top: 50px;
+}
+
+.infosectiontitle {
+	text-align: left;
+	padding-left: 20px;
+	clear: left;
+}
+
+.locp {
+	text-align: left;
+	padding-left: 20px;
 }

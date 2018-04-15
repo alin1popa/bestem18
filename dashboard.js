@@ -55,7 +55,7 @@ function showInfo(place_id) {
     pin = pins.find((p) => p.place_id == place_id);
     getWeatherJSON(pin.lat, pin.lng, function(forecast) {
         console.log(forecast);
-        document.getElementById("infoweather").innerHTML = "<h4>Weather forecast</h4>";
+        document.getElementById("infoweather").innerHTML = "<h4 class='infosectiontitle'>Weather forecast</h4>";
 
         forecast.map((f) => {
             document.getElementById("infoweather").innerHTML += "" +
@@ -69,6 +69,10 @@ function showInfo(place_id) {
     });
 
     document.getElementById("infotitle").innerHTML = "<h3>Information about " + pin.name+"</h3>";
+
+    document.getElementById("infolocation").innerHTML = "<h4 class='infosectiontitle'>Location details</h4>" +
+            `<p class='locp'>Latitude: ${pin.lat}</p>` +
+            `<p class='locp'>Longitude: ${pin.lng}</p>`;
 }
 
 function showMore(place_id) {
