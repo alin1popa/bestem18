@@ -3,8 +3,34 @@
 pins =  JSON.parse(localStorage['pins']);
 console.log(pins);
 
+function getWeatherJSON(lat, lng, callback){
+    $.getJSON('http://api.apixu.com/v1/forecast.json?key=0e7686e48230480abbf113252181404&q='+lat+','+lng+'&days=10', (res) => weatherCallback(res, callback));
+
+}
+
+function weatherCallback(weatherdata, callback){
+    var apiDetails = weatherdata.forecast;
+    var forecast = [];
+    console.log(apiDetails)
+    var weatherState,  date, avgTemp, maxTemp;
+
+    for (var i = 0; i < 7; i++){
+        date = apiDetails.forecastday[i].date;
+        avgTemp = apiDetails.forecastday[i].day.avgtemp_c;
+        maxTemp = apiDetails.forecastday[i].day.maxtemp_c;
+        weatherState = apiDetails.forecastday[i].day.condition.text;
+
+
+
+        forecast.push({date, avgTemp, maxTemp, weatherState })
+    }
+
+    callback(forecast);
+}
+
 function buildAgenda() {
     document.getElementById("agenda").innerHTML = "";
+    localStorage['pins'] = JSON.stringify(pins);
 
     pins.map((pin) => {
         document.getElementById("agenda").innerHTML +=
@@ -26,7 +52,23 @@ function showDelete(place_id) {
 }
 
 function showInfo(place_id) {
+    pin = pins.find((p) => p.place_id == place_id);
+    getWeatherJSON(pin.lat, pin.lng, function(forecast) {
+        console.log(forecast);
+        document.getElementById("infoweather").innerHTML = "<h4>Weather forecast</h4>";
 
+        forecast.map((f) => {
+            document.getElementById("infoweather").innerHTML += "" +
+            "<div class='forecastsquare'>" +
+                `<div class='forecastdate'>${f.date}</div>` +
+                `<div class='maxtemp'>${f.maxTemp}</div>` +
+                `<div class='avgtemp'>${f.avgTemp}</div>` +
+                `<div class='forecaststate'>${f.weatherState}</div>` +
+            "</div>"
+        });
+    });
+
+    document.getElementById("infotitle").innerHTML = "<h3>Information about " + pin.name+"</h3>";
 }
 
 function showMore(place_id) {

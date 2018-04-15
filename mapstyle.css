@@ -139,6 +139,8 @@ html, body {
     background-color: #193954;
     position: relative;
     padding: 7px;
+
+    border-radius: 5px;
 }
 
 .recname {
