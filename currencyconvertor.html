@@ -1,0 +1,27 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Weather</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    function getConversionJSON(from, to, amount){
+        $.getJSON('https://free.currencyconverterapi.com/api/v5/convert?q=' + from + '_' + to, (result) => currencyCallback(from, to, amount, result));
+        
+    }
+
+
+    function currencyCallback(from, to, amount, currencyData){
+    	var key = from + "_" + to;
+    	result = currencyData.results[key].val * amount;
+    	console.log(result);
+    }
+
+    </script>
+</head>
+<body>
+<!-- Converts 1 EURO to RON  -->
+<button id = "getIt" onclick = "getConversionJSON('EUR', 'RON', 1)">Get JSON</button>
+</body>
+</html>
